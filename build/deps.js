@@ -49,7 +49,7 @@ var deps = {
 	Plugins: {
 		src: [
 			'Plugins/Transition.js',
-			'Plugins/Sound.js',
+			// 'Plugins/Sound.js',
 			'Plugins/Tab.js',
 			'Plugins/Alert.js',
 			'Plugins/ToastMessage.js',
@@ -59,10 +59,10 @@ var deps = {
 			'Plugins/Tooltip.js',
 			'Plugins/Popover.js',
 			'Plugins/AutoFix.js',
-			'Plugins/AudioPlayer.js'
+			// 'Plugins/AudioPlayer.js'
 		],
 		
-		desc: 'The library Plugins.',
+		desc: 'Yaex Plugins.',
 	}
 };
 
