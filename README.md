@@ -58,7 +58,7 @@ Yaex modules are individual files in the "src/" directory.
   </tr>
   <tr>
     <th><a href="src/FX.Methods.js#files">FX.Methods.js</a></th>
-    <td></td>
+    <td>✔</td>
     <td>
       Animated <code>show</code>, <code>hide</code>, <code>toggle</code>,
       and <code>fade*()</code> methods.

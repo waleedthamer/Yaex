@@ -4,6 +4,8 @@ var deps = {
 			'Yaex.js',
 			'Core.js', 
 			'Event.js', 
+			'FX.js', 
+			'FX.Methods.js', 
 			'Ajax.js', 
 			'Form.js', 
 			'IE.js'
