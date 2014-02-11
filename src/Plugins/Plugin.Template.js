@@ -1,6 +1,8 @@
-+(function (window, document, undefined) {
-	// Extension information
-	var ExtensionInformation = {
++ ('Yaex', function ($) {
+	'use strict';
+
+	// Plugin information
+	var PluginInfo = {
 		Package: '',
 		Description: '',
 		Author: '',
@@ -11,39 +13,40 @@
 		Status: 'Stable'
 	};
 
-	// Default options for the extension
-	var DefaultOptions = {
+	// Default options for the Plugin
+	var PluginOptions = {
 		//...
 	};
 
-	function Extension(element, options) {
+	function Plugin(element, options) {
 		this.Element = element;
 
 		// Merge the options given by the user with the defaults
-		this.Options = $.Extend({}, DefaultOptions, options);
+		this.Options = $.Extend({}, PluginOptions, options);
 
 		this.$el = $(el);
 		this.$el.data(name, this);
 
-		this.DefaultOptions = {};
+		this.PluginOptions = {};
 
 		var Meta = this.$el.data(name + '-opts');
 
 		this.init();
 	}
 
-	Extension.prototype.init = function () {
+	Plugin.prototype.init = function () {
 		// You have access to this.Options and this.Element
 	};
 
-	$.fn.Extension = function (defaults) {
-		Settings = $.Extend({}, $.fn.Extension.DefaultOptions, defaults);
+	$.fn.Plugin = function (defaults) {
+		Settings = $.Extend({}, $.fn.Plugin.PluginOptions, defaults);
 
 		return this.each(function () {
 			var element = this;
 			var paragraph = $(this);
 
-			new Extension(this, options);
+			new Plugin(this, options);
 		});
 	};
-})(window, document)
+
+})(Yaex)
