@@ -2186,12 +2186,6 @@
 
 	$.Yaex = Yaex;
 
-	if (isObject(window) && isObject(window.document)) {
-		window.Yaex = window.$ = $;
-	}
-
-	return $;
+	'Yaex' in window || (window['Yaex'] = $);
+	'$' in window || (window['$'] = $);
 })()
-
-// 'Yaex' in window || (window.Yaex = $);
-// '$' in window || (window.$ = Yaex);
