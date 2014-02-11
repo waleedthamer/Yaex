@@ -22,8 +22,6 @@
  */
 
 
-
-
 ('Yaex', function () {
 	'use strict';
 	var undefined;
@@ -2212,15 +2210,9 @@
 
 	$.Yaex = Yaex;
 
-	if (isObject(window) && isObject(window.document)) {
-		window.Yaex = window.$ = $;
-	}
-
-	return $;
+	'Yaex' in window || (window['Yaex'] = $);
+	'$' in window || (window['$'] = $);
 })()
-
-// 'Yaex' in window || (window.Yaex = $);
-// '$' in window || (window.$ = Yaex);
 
 /**
  * Event - Cross browser events implementation using Yaex's API

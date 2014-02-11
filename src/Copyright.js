@@ -20,4 +20,3 @@
  * @link http://mefso.org/en-GB/projects/yaex
  * @since Version 0.10-dev Beta 4
  */
-
