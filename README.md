@@ -1,6 +1,11 @@
-<img src="media/yaexlogo-01.png">
+<table>
+  <tbody>
+    <tr>
+      <img src="media/yaexlogo-01.png">
+    </tr>
+  </tbody>
+</table>
 
-# Yaex
 # Yet another simple Javascript library
 
 Yaex is a JavaScript library for modern browsers with a
