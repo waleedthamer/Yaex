@@ -1,5 +1,5 @@
 <center>
-  <img src="media/yaexlogo-01.png" alt="Yaex - Yet another simple Javascript library">
+  <img src="media/yaexlogo-01.png">
 </center>
 
 # Yet another simple Javascript library
