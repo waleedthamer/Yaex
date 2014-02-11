@@ -1,11 +1,12 @@
 <table>
   <tbody>
     <tr>
-      <img src="media/yaexlogo-01.png">
+      <td>
+        <img src="media/yaexlogo-01.png" alt="Yaex - Yet another simple Javascript library">
+      </td>
     </tr>
   </tbody>
 </table>
-
 # Yet another simple Javascript library
 
 Yaex is a JavaScript library for modern browsers with a
