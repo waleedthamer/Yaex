@@ -1155,7 +1155,4 @@
 			$(document).trigger('deviceready');
 		});
 	}
-
-	//---
-
 })(Yaex)
