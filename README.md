@@ -1,4 +1,7 @@
-# Yaex – Yet another simple Javascript library
+<img src="media/yaexlogo-01.png">
+
+# Yaex
+# Yet another simple Javascript library
 
 Yaex is a JavaScript library for modern browsers with a
 simply jQuery/Zepto compatible API. If you use jQuery or Zepto, you already know how to use Yaex.
