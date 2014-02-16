@@ -560,22 +560,6 @@
 
 	// Copy all but undefined properties from one or more
 	// objects to the `target` object.
-	$._Extend = function (target) {
-		var deep;
-		var args = slice.call(arguments, 1);
-
-		if (typeof target === 'boolean') {
-			deep = target;
-			target = args.shift();
-		}
-
-		args.forEach(function (arg) {
-			Extend(target, arg, deep);
-		});
-
-		return target;
-	};
-
 	$.Extend = function () {
 		var options;
 		var name;
