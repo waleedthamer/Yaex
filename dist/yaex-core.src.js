@@ -665,8 +665,7 @@
 		value == null ? node.removeAttribute(name) : node.setAttribute(name, value);
 	}
 
-	// access className property while respecting SVGAnimatedString
-
+	// Access className property while respecting SVGAnimatedString
 	function className(node, value) {
 		var klass = node.className;
 		var svg = klass && klass.baseVal !== undefined;
