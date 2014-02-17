@@ -1,0 +1,220 @@
+@import'font-awesome.css';
+@import'codemirror.css';
+
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'OpenSansLight';
+	src: url('../fonts/OpenSans-Light-webfont.eot');
+	src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
+		 url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+		 url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+}
+
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'OpenSansRegular';
+	src: url('../fonts/OpenSans-Regular-webfont.eot');
+	src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+		 url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+		 url('../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+}
+
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'OpenSansSemibold';
+	src: url('../fonts/OpenSans-Semibold-webfont.eot');
+	src: url('../fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/OpenSans-Semibold-webfont.woff') format('woff'),
+		 url('../fonts/OpenSans-Semibold-webfont.ttf') format('truetype'),
+		 url('../fonts/OpenSans-Semibold-webfont.svg#OpenSansSemibold') format('svg');
+}
+
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'OpenSansBold';
+	src: url('../fonts/OpenSansBold-webfont.eot');
+	src: url('../fonts/OpenSansBold-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/OpenSansBold-webfont.woff') format('woff'),
+		 url('../fonts/OpenSansBold-webfont.ttf') format('truetype'),
+		 url('../fonts/OpenSansBold-webfont.svg#OpenSansBold') format('svg');
+
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+html, body {
+	display: table;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: rgb(238, 238, 236);
+	color: rgb(80, 80, 80);
+	font-size: 14px;
+	line-height: 22px;
+	/*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+	font-family: 'OpenSansRegular';
+	-webkit-text-size-adjust: none;
+}
+a:link {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a[href="#"] {
+	-webkit-touch-callout: none;
+}
+img {
+	border: 0;
+}
+hr {
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 0;
+	height: 1px;
+	border: 0;
+	/*background: rgba(0, 0, 0, .2);*/
+	background-image: linear-gradient(90deg, rgba(12, 61, 124, .1), rgba(12, 61, 124, .6), rgba(12, 61, 124, .1));
+}
+.Left {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
+	display: block;
+	float: left;
+	overflow: auto;
+	margin: 0 auto;
+	padding: 0;
+	width: 219px;
+	border-right: 1px solid rgb(32, 81, 144);
+	background: rgb(120, 120, 120);
+	box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+	/*background: linear-gradient(90deg, rgba(110, 110, 110, .9) 30%, rgba(110, 110, 110, .9) 30%, rgba(100, 100, 100, .9));*/
+	background-image: linear-gradient(90deg, rgba(52, 101, 164, .7), rgba(52, 101, 164, .9), rgba(52, 101, 164, .7));
+	-webkit-overflow-scrolling: touch;
+}
+.Right {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 220px;
+	z-index: 1;
+	display: block;
+	float: right;
+	margin: 0 auto;
+	padding: 0;
+	width: 100%;
+	border-left: 1px solid rgb(255, 255, 255);
+	background: rgb(238, 238, 236);
+	-webkit-overflow-scrolling: touch;
+}
+.Sidebar {
+	margin: 10px auto;
+	padding: 0;
+	width: 180px;
+}
+.Sidebar hr {
+	margin: 10px auto;
+}
+.Sidebar a:link, .Sidebar a:visited {
+	color: rgb(255, 255, 255);
+}
+.Sidebar a.LeftTitle:link, .Sidebar a.LeftTitle:visited {
+	display: block;
+	margin: 0 auto;
+	height: 30px;
+	text-decoration: none;
+	font-size: 16px;
+	font-family: 'OpenSansSemibold';
+	line-height: 30px;
+}
+.Sidebar a.LeftTitle span.Version {
+	font-size: 14px;
+	font-family: 'OpenSansLight';
+}
+.Sidebar a.LeftTitle i:nth-child(2) {
+	float: right;
+	margin-top: 10px;
+	margin-right: 5px;
+	color: rgba(253, 232, 79, .2);
+	font-size: 12px;
+}
+.Sidebar ul.LeftSection {
+	display: block;
+	list-style-type: none;
+}
+.Sidebar ul.LeftSection li {
+	display: block;
+	height: 25px;
+}
+.Sidebar ul.LeftSection li:hover {
+}
+.Sidebar ul.LeftSection li a:link, .Sidebar ul.LeftSection li a:visited {
+	display: block;
+	padding: 0px 3px 0px 3px;
+	color: rgba(255, 255, 225, .9);
+	text-shadow: 0 -1px 1px rgba(0, 0, 0, .2);
+	letter-spacing: 1px;
+	font-size: 14px;
+	font-family: 'OpenSansLight';
+}
+.Sidebar ul.LeftSection li a:hover {
+	border-radius: 3px;
+	background-color: rgba(0, 0, 0, .1);
+	text-decoration: none;
+	-webkit-transition-duration: .5s;
+	-moz-transition-duration: .5s;
+	transition-duration: .5s;
+	-webkit-transition-property: -webkit-transform, background-color;
+	-moz-transition-property: -moz-transform, background-color;
+	transition-property: transform, background-color;
+}
+.Sidebar ul.LeftSection li a:hover i {
+	color: rgba(253, 232, 79, .8);
+}
+.Sidebar ul.Top li a {
+	color: rgba(255, 255, 255, .8) !important;
+	font-weight: bold;
+}
+.Sidebar ul.Top li a i {
+	color: rgba(253, 232, 79, .7);
+	font-size: 14px !important;
+}
+.Sidebar ul.Top li a:hover {
+	color: rgba(253, 232, 79, .8) !important;
+	text-shadow: 0 -1px 1px rgba(0, 0, 0, .4);
+	font-weight: bold;
+	-webkit-transition-duration: .5s;
+	-moz-transition-duration: .5s;
+	transition-duration: .5s;
+	-webkit-transition-property: -webkit-transform, color;
+	-moz-transition-property: -moz-transform, color;
+	transition-property: transform, color;
+}
+.Sidebar ul.Top li a:hover i {
+	color: rgba(255, 255, 255, .7);
+}
+.Sidebar ul.LeftSection li a i {
+	font-size: 14px;
+	line-height: 10px;
+}
+.Container {
+}
+.HideMe {
+	display: none !important;
+	visibility: hidden;
+}

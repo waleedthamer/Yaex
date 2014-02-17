@@ -693,7 +693,7 @@
 		}
 	}
 
-	$.trim = function (str) {
+	$.trim = $.Trim = function (str) {
 		return str == null ? "" : String.prototype.trim.call(str);
 	};
 
@@ -714,7 +714,7 @@
 		return $_tmp;
 	};
 
-	$.InToArray = function ($array, $data) {
+	$.IntoArray = function ($array, $data) {
 		var $_tmp = [];
 
 		for (var $i = 0; $i < $array.length; ++$i) {
@@ -744,7 +744,7 @@
 		return $_tmp;
 	};
 
-	$.type = type;
+	$.type = $.Type = type;
 	$.isUndefined = isUndefined;
 	$.isFunction = isFunction;
 	$.isWindow = isWindow;
@@ -769,17 +769,17 @@
 	$.core_toString = core_toString;
 	$.core_hasOwn = core_hasOwn;
 	$.core_rnotwhite = core_rnotwhite;
-	$.delay = delay;
-	$.vardump = varDump;
-	$.getWindow = getWindow;
-	$.contains = contains;
-	$.randomNumber = randomNumber;
+	$.Delay = delay;
+	$.vardump = $.VarDump = varDump;
+	$.getWindow = $.GetWindow = getWindow;
+	$.contains = $.Contains = contains;
+	$.randomNumber = $.RandomNumber = randomNumber;
 	$.makeArray = MakeArray;
 	$.merge = Merge;
 	$.emptyArray = emptyArray;
 	$.timers = [];
 
-	$.location = window.location;
+	$.location = $.Location = window.location;
 
 	$.Globals = {};
 	$.Now = Date.now;
@@ -791,7 +791,7 @@
 	$.expr = {};
 	$.UUID = 0;
 
-	$.map = function (elements, callback) {
+	$.map = $.Map = function (elements, callback) {
 		var value, values = [],
 			i, key;
 		if (likeArray(elements))
@@ -809,7 +809,7 @@
 		return flatten(values);
 	};
 
-	$.each = function (elements, callback) {
+	$.each = $.Each = function (elements, callback) {
 		var i;
 		var key;
 
@@ -830,13 +830,9 @@
 		return elements;
 	};
 
-	$.grep = function (elements, callback) {
+	$.grep = $.Grep = function (elements, callback) {
 		return filter.call(elements, callback);
 	};
-
-	if (window.JSON) {
-		$.ParseJSON = JSON.parse;
-	}
 
 	// Populate the class2type map
 	$.each('Boolean Number String Function Array Date RegExp Object Error'.split(' '), function (i, name) {
@@ -873,7 +869,7 @@
 	// Define methods that will be available on all
 	// Yaex collections
 	// $.fn = Yaex.init.prototype = Yaex.prototype = {
-	$.fn = Yaex.prototype = {
+	$.fn = $.FN = Yaex.prototype = {
 		// Because a collection acts like an array
 		// copy over these useful array functions.
 		forEach: emptyArray.forEach,
@@ -1248,7 +1244,7 @@
 				}
 			}
 
-			return $.access(this, function (elem, name, value) {
+			return $.Access(this, function (elem, name, value) {
 				var styles;
 				var len;
 				var map = {};
@@ -1259,15 +1255,15 @@
 					len = name.length;
 
 					for (; i < len; i++) {
-						map[name[i]] = $.css(elem, name[i], false, styles);
+						map[name[i]] = $.CSS(elem, name[i], false, styles);
 					}
 
 					return map;
 				}
 
 				return value !== undefined ?
-					$.style(elem, name, value) :
-					$.css(elem, name);
+					$.Style(elem, name, value) :
+					$.CSS(elem, name);
 			}, name, value, arguments.length > 1);
 		},
 		index: function (element) {
@@ -1379,7 +1375,7 @@
 			return this.map(function () {
 				var offsetParent = this.offsetParent || docelem;
 
-				while (offsetParent && (!$.nodeName(offsetParent, 'html') && $.css(offsetParent, 'position') === 'static')) {
+				while (offsetParent && (!$.nodeName(offsetParent, 'html') && $.CSS(offsetParent, 'position') === 'static')) {
 					offsetParent = offsetParent.offsetParent;
 				}
 
@@ -1447,7 +1443,7 @@
 	$.offset = {
 		setOffset: function (elem, options, i) {
 			var curPosition, curLeft, curCSSTop, curTop, curOffset, curCSSLeft, calculatePosition,
-				position = $.css(elem, "position"),
+				position = $.CSS(elem, "position"),
 				curElem = $(elem),
 				props = {};
 
@@ -1457,8 +1453,8 @@
 			}
 
 			curOffset = curElem.offset();
-			curCSSTop = $.css(elem, "top");
-			curCSSLeft = $.css(elem, "left");
+			curCSSTop = $.CSS(elem, "top");
+			curCSSLeft = $.CSS(elem, "left");
 			calculatePosition = (position === "absolute" || position === "fixed") && (curCSSTop + curCSSLeft).indexOf("auto") > -1;
 
 			// Need to be able to calculate position if either top or left is auto and position is either absolute or fixed
@@ -1502,7 +1498,7 @@
 		// data: string of html
 		// context (optional): If specified, the fragment will be created in this context, defaults to document
 		// keepScripts (optional): If true, will include scripts passed in the html string
-		parseHTML: function (data, context, keepScripts) {
+		ParseHTML: function (data, context, keepScripts) {
 			if (!data || typeof data !== "string") {
 				return null;
 			}
@@ -1528,9 +1524,9 @@
 
 			return $.merge([], parsed.childNodes);
 		},
-		parseJSON: JSON.parse,
+		ParseJSON: JSON.parse,
 		// Cross-browser xml parsing
-		parseXML: function (data) {
+		ParseXML: function (data) {
 			var xml;
 			var tmp;
 
@@ -1551,7 +1547,7 @@
 			}
 			return xml;
 		},
-		noop: function () {},
+		Noop: function () {},
 		// Evaluates a script in a global context
 		globalEval: function (code) {
 			var script;
@@ -1583,7 +1579,7 @@
 
 		// Multifunctional method to get and set values of a collection
 		// The value/s can optionally be executed if it's a function
-		access: function (elems, fn, key, value, chainable, emptyGet, raw) {
+		Access: function (elems, fn, key, value, chainable, emptyGet, raw) {
 			var i = 0;
 			var length = elems.length;
 			var bulk = key === null;
@@ -1592,7 +1588,7 @@
 			if (type(key) === 'object') {
 				chainable = true;
 				for (i in key) {
-					$.access(elems, fn, i, key[i], true, emptyGet, raw);
+					$.Access(elems, fn, i, key[i], true, emptyGet, raw);
 				}
 				// Sets one value
 			} else if (value !== undefined) {
@@ -1631,7 +1627,7 @@
 		// A method for quickly swapping in/out CSS properties to get correct calculations.
 		// Note: this method belongs to the css module but it's needed here for the support module.
 		// If support gets modularized, this method should be moved back to the css module.
-		swap: function (elem, options, callback, args) {
+		Swap: function (elem, options, callback, args) {
 			var ret, name,
 				old = {};
 
@@ -1665,8 +1661,11 @@
 		},
 		nodeName: function (elem, name) {
 			return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
-		}
+		}		
 	});
+
+	$.NodeName = $.nodeName;
+	$.PushStack = $.pushStack;
 
 	// Generate the `width` and `height` functions
 	['width', 'height'].forEach(function (dimension) {
@@ -1697,7 +1696,7 @@
 		var top = 'pageYOffset' === prop;
 
 		$.fn[method] = function (val) {
-			return $.access(this, function (elem, method, val) {
+			return $.Access(this, function (elem, method, val) {
 				var win = getWindow(elem);
 
 				if (val === undefined) {
@@ -1736,7 +1735,7 @@
 		cssExpand = ["Top", "Right", "Bottom", "Left"],
 		cssPrefixes = ["Webkit", "O", "Moz", "ms"];
 
-	$.cssExpand = cssExpand;
+	$.CSSExpand = cssExpand;
 
 	// return a css property mapped to a potentially vendor prefixed property
 
@@ -1802,7 +1801,7 @@
 			"float": "cssFloat"
 		},
 		// Get and set the style property on a DOM Node
-		style: function (elem, name, value, extra) {
+		Style: function (elem, name, value, extra) {
 			// Don't set styles on text and comment nodes
 			if (!elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style) {
 				return;
@@ -1828,7 +1827,7 @@
 
 				// convert relative number strings (+= or -=) to relative numbers. #7345
 				if (type === "string" && (ret = rrelNum.exec(value))) {
-					value = (ret[1] + 1) * ret[2] + parseFloat($.css(elem, name));
+					value = (ret[1] + 1) * ret[2] + parseFloat($.CSS(elem, name));
 
 					// Fixes bug #9237
 					type = "number";
@@ -1869,7 +1868,7 @@
 				return style[name];
 			}
 		},
-		css: function (elem, name, extra, styles) {
+		CSS: function (elem, name, extra, styles) {
 			var val, num, hooks,
 				origName = $.camelCase(name);
 
@@ -1916,7 +1915,7 @@
 		if (computed) {
 
 			if (ret === "" && !contains(elem.ownerDocument, elem)) {
-				ret = $.style(elem, name);
+				ret = $.Style(elem, name);
 			}
 
 			// Support: Safari 5.1
@@ -1963,26 +1962,26 @@
 		for (; i < 4; i += 2) {
 			// both box models exclude margin, so add it if we want it
 			if (extra === "margin") {
-				val += $.css(elem, extra + cssExpand[i], true, styles);
+				val += $.CSS(elem, extra + cssExpand[i], true, styles);
 			}
 
 			if (isBorderBox) {
 				// border-box includes padding, so remove it if we want content
 				if (extra === "content") {
-					val -= $.css(elem, "padding" + cssExpand[i], true, styles);
+					val -= $.CSS(elem, "padding" + cssExpand[i], true, styles);
 				}
 
 				// at this point, extra isn't border nor margin, so remove border
 				if (extra !== "margin") {
-					val -= $.css(elem, "border" + cssExpand[i] + "Width", true, styles);
+					val -= $.CSS(elem, "border" + cssExpand[i] + "Width", true, styles);
 				}
 			} else {
 				// at this point, extra isn't content, so add padding
-				val += $.css(elem, "padding" + cssExpand[i], true, styles);
+				val += $.CSS(elem, "padding" + cssExpand[i], true, styles);
 
 				// at this point, extra isn't content nor padding, so add border
 				if (extra !== "padding") {
-					val += $.css(elem, "border" + cssExpand[i] + "Width", true, styles);
+					val += $.CSS(elem, "border" + cssExpand[i] + "Width", true, styles);
 				}
 			}
 		}
@@ -1996,7 +1995,7 @@
 		var valueIsBorderBox = true,
 			val = name === "width" ? elem.offsetWidth : elem.offsetHeight,
 			styles = getStyles(elem),
-			isBorderBox = $.Support.boxSizing && $.css(elem, "boxSizing", false, styles) === "border-box";
+			isBorderBox = $.Support.boxSizing && $.CSS(elem, "boxSizing", false, styles) === "border-box";
 
 		// some non-html elements return undefined for offsetWidth, so check for null/undefined
 		// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
@@ -2040,7 +2039,7 @@
 				if (computed) {
 					// certain elements can have dimension info if we invisibly show them
 					// however, it must have a current display style that would benefit from this
-					return elem.offsetWidth === 0 && rdisplayswap.test($.css(elem, "display")) ?
+					return elem.offsetWidth === 0 && rdisplayswap.test($.CSS(elem, "display")) ?
 						$.swap(elem, cssShow, function () {
 							return getWidthOrHeight(elem, name, extra);
 						}) :
@@ -2054,7 +2053,7 @@
 						elem,
 						name,
 						extra,
-						$.Support.boxSizing && $.css(elem, "boxSizing", false, styles) === "border-box",
+						$.Support.boxSizing && $.CSS(elem, "boxSizing", false, styles) === "border-box",
 						styles
 					) : 0
 				);
@@ -2076,7 +2075,7 @@
 				var chainable = arguments.length && (defaultExtra || typeof margin !== 'boolean');
 				var extra = defaultExtra || (margin === true || value === true ? 'margin' : 'border');
 
-				return $.access(this, function (elem, type, value) {
+				return $.Access(this, function (elem, type, value) {
 					var doc;
 
 					if ($.isWindow(elem)) {
@@ -2101,9 +2100,9 @@
 
 					return value === undefined ?
 					// Get width or height on the element, requesting but not forcing parseFloat
-					$.css(elem, type, extra) :
+					$.CSS(elem, type, extra) :
 					// Set width or height on the element
-					$.style(elem, type, value, extra);
+					$.Style(elem, type, value, extra);
 				}, type, chainable ? margin : undefined, chainable, null);
 			};
 		});
