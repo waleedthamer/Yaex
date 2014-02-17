@@ -17,9 +17,9 @@
 
 	var DefaultOptions = {
 		DefaultPath: '/',
-		Before: $.noop,
-		On: $.noop,
-		NotFound: $.noop
+		Before: $.Noop,
+		On: $.Noop,
+		NotFound: $.Noop
 	}; // END OF DefaultOptions CLASS
 
 	var Router = {
