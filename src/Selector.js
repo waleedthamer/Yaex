@@ -22,7 +22,7 @@
 	// Complex selectors are not supported:
 	//   li:has(label:contains("foo")) + li:has(label:contains("bar"))
 	//   ul.inner:first > li
-	var filters = $.expr[':'] = {
+	var filters = $.Expr[':'] = {
 		visible: function () {
 			if (visible(this)) return this;
 		},
@@ -61,7 +61,7 @@
 	}
 
 	function process(sel, fn) {
-		// quote the hash in `a[href^=#]` expression
+		// Quote the hash in `a[href^=#]` expression
 		sel = sel.replace(/=#\]/g, '="#"]');
 
 		var filter;
@@ -99,7 +99,7 @@
 				var nodes = oldQsa(node, sel);
 			} catch (e) {
 				// console.error('error performing selector: %o', selector);
-				$.Error('error performing selector: %o', selector);
+				$.Error('Error performing selector: %o', selector);
 				throw e;
 			} finally {
 				if (taggedParent) {
@@ -107,7 +107,7 @@
 				}
 			}
 			return !filter ? nodes :
-				$.Unique($.map(nodes, function (n, i) {
+				$.Unique($.Map(nodes, function (n, i) {
 					return filter.call(n, i, nodes, arg);
 				}));
 		});

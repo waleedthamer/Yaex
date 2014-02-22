@@ -13,7 +13,7 @@
 	// Routes array
 	var Routes = [];
 
-	var location = $.location;
+	var location = $.Location;
 
 	var DefaultOptions = {
 		DefaultPath: '/',

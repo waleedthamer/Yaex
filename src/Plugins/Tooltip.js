@@ -22,8 +22,7 @@
 		title: '',
 		delay: 0,
 		html: false,
-		container: 'body'
-		// container: false
+		container: false
 	};
 
 	Tooltip.prototype.init = function (type, element, options) {
@@ -38,13 +37,21 @@
 			var trigger = triggers[i];
 
 			if (trigger == 'click') {
-				this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this));
-			} else if (trigger != 'manual') {
-				var eventIn = trigger == 'hover' ? 'mouseenter' : 'focus';
-				var eventOut = trigger == 'hover' ? 'mouseleave' : 'blur';
+				this.$element.bind('click.' + this.type, this.options.selector, $.Proxy(this.toggle, this));
+			} else if (trigger !== 'manual') {
+				var eventIn;
+				var eventOut;
 
-				this.$element.on(eventIn + '.' + this.type, this.options.selector, $.proxy(this.enter, this));
-				this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this));
+				if (trigger == 'hover') {
+					eventIn = 'mouseenter';
+					eventOut = 'mouseleave';
+				} else {
+					eventIn = 'focus';
+					eventOut = 'blur';
+				}
+
+				this.$element.on(eventIn + '.' + this.type, this.options.selector, null, $.Proxy(this.enter, this));
+				this.$element.on(eventOut + '.' + this.type, this.options.selector, null, $.Proxy(this.leave, this));
 			}
 		}
 
@@ -77,7 +84,7 @@
 		var options = {};
 		var defaults = this.getDefaults();
 
-		this._options && $.each(this._options, function (key, value) {
+		this._options && $.Each(this._options, function (key, value) {
 			if (defaults[key] != value) options[key] = value;
 		});
 
@@ -87,7 +94,7 @@
 	Tooltip.prototype.enter = function (obj) {
 		var self = obj instanceof this.constructor ?
 			obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('yaex.' + this.type);
-
+			
 		clearTimeout(self.timeout);
 
 		self.hoverState = 'in';
@@ -136,6 +143,7 @@
 			var autoPlace = autoToken.test(placement);
 			if (autoPlace) placement = placement.replace(autoToken, '') || 'top';
 
+
 			$tip
 				.detach()
 				.css({
@@ -146,6 +154,7 @@
 				.addClass(placement);
 
 			this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element);
+			// this.options.container ? $tip.appendTo(this.options.container) : $tip.insertBefore(this.$element);
 
 			var pos = this.getPosition();
 			var actualWidth = $tip[0].offsetWidth;
@@ -166,9 +175,7 @@
 					placement == 'left' && pos.left - actualWidth < parentLeft ? 'right' :
 					placement;
 
-				$tip
-					.removeClass(orgPlacement)
-					.addClass(placement);
+				$tip.removeClass(orgPlacement).addClass(placement);
 			}
 
 			var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight);
@@ -195,9 +202,7 @@
 		offset.top = offset.top + marginTop;
 		offset.left = offset.left + marginLeft;
 
-		$tip
-			.offset(offset)
-			.addClass('in');
+		$tip.offset(offset).addClass('in');
 
 		// check to see if placing tip in new offset caused the tip to resize itself
 		var actualWidth = $tip[0].offsetWidth;
@@ -226,7 +231,9 @@
 			this.replaceArrow(actualHeight - height, actualHeight, 'top');
 		}
 
-		if (replace) $tip.offset(offset);
+		if (replace) {
+			$tip.offset(offset);
+		}
 	};
 
 	Tooltip.prototype.replaceArrow = function (delta, dimension, position) {
@@ -355,10 +362,6 @@
 		this.hide().$element.off('.' + this.type).removeData('yaex.' + this.type);
 	};
 
-
-	// TOOLTIP MODULE DEFINITION
-	// var old = $.fn.tooltip
-
 	$.fn.tooltip = function (option) {
 		return this.each(function () {
 			var $this = $(this);
@@ -370,12 +373,5 @@
 		});
 	};
 
-	$.fn.tooltip.Constructor = Tooltip;
-
-
-	// // TOOLTIP NO CONFLICT
-	// $.fn.tooltip.noConflict = function () {
-	// 	$.fn.tooltip = old;
-	// 	return this;
-	// };
+	$.fn.tooltip.constructor = Tooltip;
 })(Yaex)
