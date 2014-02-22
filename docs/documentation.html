@@ -1,530 +1,773 @@
 <!DOCTYPE html>
 <html temscope itemtype="http://schema.org/WebPage" lang="en-GB">
+
 <head>
 	<title>Yaex - Yet another Javascript library</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta name="description" content="Yet another jQuery/Zepto compatible JavaScript library">
+	<meta name="description" content="Yet another jQuery/Yaex compatible JavaScript library">
 	<link rel="stylesheet" href="assets/stylesheets/style.css">
+	<link rel="stylesheet" href="assets/stylesheets/yaex-light.css">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="white">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="apple-touch-icon-precomposed" href="assets/images/icon.png">
 	<link rel="icon" type="image/png" href="assets/images/favicon.png">
+	<script type="text/javascript" src="assets/javascript/codemirror.js"></script>
+	<script type="text/javascript" src="assets/javascript/yaex-core.js"></script>
+	<link rel="stylesheet" href="assets/stylesheets/codemirror.css">
+	<link rel="stylesheet" href="assets/stylesheets/theme/ambiance.css">
+	<script type="text/javascript" src="assets/javascript/javascript/javascript.js"></script>
 </head>
-<body>
-	<aside class="Left">
-		<div class="Sidebar">
-			<a class="LeftTitle" href="#">Yaex <span class="Version" title="This feature is only available in Yaex (0.10)">(0.10)</span> <i class="fa fa-chevron-left"></i></a>
-			<ul class="LeftSection Top">
-				<li>
-					<a href="#about"><i class="fa fa-info-circle"></i> About</a>
-				</li>
-				<li>
-					<a href="#download"><i class="fa fa-download"></i> Download</a>
-				</li>
-				<li>
-					<a href="#browsers"><i class="fa fa-globe"></i> Browser Support</a>
-				</li>
-				<li>
-					<a href="#modules"><i class="fa fa-cogs"></i> Modules</a>
-				</li>
-				<li>
-					<a href="#changelog"><i class="fa fa-pencil-square-o"></i> Change Log</a>
-				</li>
-				<li>
-					<a href="#acknowledgements"><i class="fa fa-asterisk"></i> Thanks</a>
-				</li>
-			</ul>
-			<hr class="">
-			<a class="LeftTitle" href="#core"><i class="fa fa-code"></i> Core <i class="fa fa-chevron-left"></i></a>
-			<ul class="LeftSection">
-				<li>
-					<a href="#$"><i class="fa fa-usd"></i></a>
-				</li>
-				<li>
-					<a href="#$()"><i class="fa fa-usd"></i>()</a>
-				</li>
-				<li>
-					<a href="#$.camelCase"><i class="fa fa-usd"></i>.camelCase</a>
-				</li>
-				<li>
-					<a href="#$.Contains"><i class="fa fa-usd"></i>.Contains</a>
-				</li>
-				<li>
-					<a href="#$.Each"><i class="fa fa-usd"></i>.Each</a>
-				</li>
-				<li>
-					<a href="#$.Extend"><i class="fa fa-usd"></i>.Extend</a>
-				</li>
-				<li>
-					<a href="#$.FN"><i class="fa fa-usd"></i>.FN</a>
-				</li>
-				<li>
-					<a href="#$.Grep"><i class="fa fa-usd"></i>.Grep</a>
-				</li>
-				<li>
-					<a href="#$.inArray"><i class="fa fa-usd"></i>.inArray</a>
-				</li>
-				<li>
-					<a href="#$.isArray"><i class="fa fa-usd"></i>.isArray</a>
-				</li>
-				<li>
-					<a href="#$.isFunction"><i class="fa fa-usd"></i>.isFunction</a>
-				</li>
-				<li>
-					<a href="#$.isObject"><i class="fa fa-usd"></i>.isObject</a>
-				</li>
-				<li>
-					<a href="#$.isPlainObject"><i class="fa fa-usd"></i>.isPlainObject</a>
-				</li>
-				<li>
-					<a href="#$.isDocument"><i class="fa fa-usd"></i>.isDocument</a>
-				</li>
-				<li>
-					<a href="#$.isWindow"><i class="fa fa-usd"></i>.isWindow</a>
-				</li>
-				<li>
-					<a href="#$.isUndefined"><i class="fa fa-usd"></i>.isUndefined</a>
-				</li>
-				<li>
-					<a href="#$.isNumeric"><i class="fa fa-usd"></i>.isNumeric</a>
-				</li>
-				<li>
-					<a href="#$.isString"><i class="fa fa-usd"></i>.isString</a>
-				</li>
-				<li>
-					<a href="#$.isNull"><i class="fa fa-usd"></i>.isNull</a>
-				</li>
-				<li>
-					<a href="#$.isEmpty"><i class="fa fa-usd"></i>.isEmpty</a>
-				</li>
-				<li>
-					<a href="#$.Map"><i class="fa fa-usd"></i>.Map</a>
-				</li>
-				<li>
-					<a href="#$.GetWindow"><i class="fa fa-usd"></i>.GetWindow</a>
-				</li>
-				<li>
-					<a href="#$.ParseJSON"><i class="fa fa-usd"></i>.ParseJSON</a>
-				</li>
-				<li>
-					<a href="#$.ParseJSON"><i class="fa fa-usd"></i>.ParseXML</a>
-				</li>
-				<li>
-					<a href="#$.ParseJSON"><i class="fa fa-usd"></i>.ParseHTML</a>
-				</li>
-				<li>
-					<a href="#$.Trim"><i class="fa fa-usd"></i>.Trim</a>
-				</li>
-				<li>
-					<a href="#$.Type"><i class="fa fa-usd"></i>.Type</a>
-				</li>
-				<li>
-					<a href="#$.ArrayToObject"><i class="fa fa-usd"></i>.ArrayToObject</a>
-				</li>
-				<li>
-					<a href="#$.IntoArray"><i class="fa fa-usd"></i>.IntoArray</a>
-				</li>
-				<li>
-					<a href="#$.ObjectToArray"><i class="fa fa-usd"></i>.ObjectToArray</a>
-				</li>
-				<li>
-					<a href="#$.Access"><i class="fa fa-usd"></i>.Access</a>
-				</li>
-				<li>
-					<a href="#$.CSS"><i class="fa fa-usd"></i>.CSS</a>
-				</li>
-				<li>
-					<a href="#$.Style"><i class="fa fa-usd"></i>.Style</a>
-				</li>
-				<li>
-					<a href="#$.Swap"><i class="fa fa-usd"></i>.Swap</a>
-				</li>
-				<li>
-					<a href="#$.NodeName"><i class="fa fa-usd"></i>.NodeName</a>
-				</li>
-				<li>
-					<a href="#$.JSON_Stringify"><i class="fa fa-usd"></i>.JSON_Stringify</a>
-				</li>
-				<li>
-					<a href="#$.Noop"><i class="fa fa-usd"></i>.Noop</a>
-				</li>
-				<li>
-					<a href="#$.Location"><i class="fa fa-usd"></i>.Location</a>
-				</li>
-				<li>
-					<a href="#$.Globals"><i class="fa fa-usd"></i>.Globals</a>
-				</li>
-				<li>
-					<a href="#$.Now"><i class="fa fa-usd"></i>.Now</a>
-				</li>
-				<li>
-					<a href="#$.Support"><i class="fa fa-usd"></i>.Support</a>
-				</li>
-				<li>
-					<a href="#$.Error"><i class="fa fa-usd"></i>.Error</a>
-				</li>
-				<li>
-					<a href="#$.VarDump"><i class="fa fa-usd"></i>.VarDump</a>
-				</li>
-				<li>
-					<a href="#$.GUID"><i class="fa fa-usd"></i>.GUID</a>
-				</li>
-				<li>
-					<a href="#$.UUID"><i class="fa fa-usd"></i>.UUID</a>
-				</li>
-				<li>
-					<a href="#$.PushStack"><i class="fa fa-usd"></i>.PushStack</a>
-				</li>
-				<li>
-					<a href="#$.RandomNumber"><i class="fa fa-usd"></i>.RandomNumber</a>
-				</li>
-				<li>
-					<a href="#$.DeserializeValue"><i class="fa fa-usd"></i>.DeserializeValue</a>
-				</li>
-				<li>
-					<a href="#$.Unique"><i class="fa fa-usd"></i>.Unique</a>
-				</li>
-				<li>
-					<a href="#add">add</a>
-				</li>
-				<li>
-					<a href="#addClass">addClass</a>
-				</li>
-				<li>
-					<a href="#after">after</a>
-				</li>
-				<li>
-					<a href="#appendTo">appendTo</a>
-				</li>
-				<li>
-					<a href="#attr">attr</a>
-				</li>
-				<li>
-					<a href="#before">before</a>
-				</li>
-				<li>
-					<a href="#children">children</a>
-				</li>
-				<li>
-					<a href="#clone">clone</a>
-				</li>
-				<li>
-					<a href="#closest">closest</a>
-				</li>
-				<li>
-					<a href="#concat">concat</a>
-				</li>
-				<li>
-					<a href="#contents">contents</a>
-				</li>
-				<li>
-					<a href="#css">css</a>
-				</li>
-				<li>
-					<a href="#data">data</a>
-				</li>
-				<li>
-					<a href="#each">each</a>
-				</li>
-				<li>
-					<a href="#empty">empty</a>
-				</li>
-				<li>
-					<a href="#eq">eq</a>
-				</li>
-				<li>
-					<a href="#filter">filter</a>
-				</li>
-				<li>
-					<a href="#find">find</a>
-				</li>
-				<li>
-					<a href="#first">first</a>
-				</li>
-				<li>
-					<a href="#forEach">forEach</a>
-				</li>
-				<li>
-					<a href="#get">get</a>
-				</li>
-				<li>
-					<a href="#has">has</a>
-				</li>
-				<li>
-					<a href="#hasClass">hasClass</a>
-				</li>
-				<li>
-					<a href="#height">height</a>
-				</li>
-				<li>
-					<a href="#hide">hide</a>
-				</li>
-				<li>
-					<a href="#html">html</a>
-				</li>
-				<li>
-					<a href="#index">index</a>
-				</li>
-				<li>
-					<a href="#indexOf">indexOf</a>
-				</li>
-				<li>
-					<a href="#innerHeight">innerHeight</a>
-				</li>
-				<li>
-					<a href="#innerWidth">innerWidth</a>
-				</li>
-				<li>
-					<a href="#insertAfter">insertAfter</a>
-				</li>
-				<li>
-					<a href="#insertBefore">insertBefore</a>
-				</li>
-				<li>
-					<a href="#is">is</a>
-				</li>
-				<li>
-					<a href="#last">last</a>
-				</li>
-				<li>
-					<a href="#map">map</a>
-				</li>
-				<li>
-					<a href="#next">next</a>
-				</li>
-				<li>
-					<a href="#not">not</a>
-				</li>
-				<li>
-					<a href="#offset">offset</a>
-				</li>
-				<li>
-					<a href="#offsetParent">offsetParent</a>
-				</li>
-				<li>
-					<a href="#outerHeight">outerHeight</a>
-				</li>
-				<li>
-					<a href="#outerWidth">outerWidth</a>
-				</li>
-				<li>
-					<a href="#parent">parent</a>
-				</li>
-				<li>
-					<a href="#parents">parents</a>
-				</li>
-				<li>
-					<a href="#position">position</a>
-				</li>
-				<li>
-					<a href="#pluck">pluck</a>
-				</li>
-				<li>
-					<a href="#prepend">prepend</a>
-				</li>
-				<li>
-					<a href="#prependTo">prependTo</a>
-				</li>
-				<li>
-					<a href="#prev">prev</a>
-				</li>
-				<li>
-					<a href="#prop">prop</a>
-				</li>
-				<li>
-					<a href="#push">push</a>
-				</li>
-				<li>
-					<a href="#ready">ready</a>
-				</li>
-				<li>
-					<a href="#reduce">reduce</a>
-				</li>
-				<li>
-					<a href="#remove">remove</a>
-				</li>
-				<li>
-					<a href="#removeAttr">removeAttr</a>
-				</li>
-				<li>
-					<a href="#removeClass">removeClass</a>
-				</li>
-				<li>
-					<a href="#replaceWith">replaceWith</a>
-				</li>
-				<li>
-					<a href="#scrollLeft">scrollLeft</a>
-				</li>
-				<li>
-					<a href="#scrollTop">scrollTop</a>
-				</li>
-				<li>
-					<a href="#show">show</a>
-				</li>
-				<li>
-					<a href="#siblings">siblings</a>
-				</li>
-				<li>
-					<a href="#size">size</a>
-				</li>
-				<li>
-					<a href="#slice">slice</a>
-				</li>
-				<li>
-					<a href="#text">text</a>
-				</li>
-				<li>
-					<a href="#toggle">toggle</a>
-				</li>
-				<li>
-					<a href="#title">title</a>
-				</li>
-				<li>
-					<a href="#toggleClass">toggleClass</a>
-				</li>
-				<li>
-					<a href="#unwrap">unwrap</a>
-				</li>
-				<li>
-					<a href="#value">value</a>
-				</li>
-				<li>
-					<a href="#width">width</a>
-				</li>
-				<li>
-					<a href="#wrap">wrap</a>
-				</li>
-				<li>
-					<a href="#wrapAll">wrapAll</a>
-				</li>
-				<li>
-					<a href="#wrapInner">wrapInner</a>
-				</li>
-			</ul>
-			<hr class="">
-			<a class="LeftTitle" href="#detect"><i class="fa fa-code"></i> Detect <i class="fa fa-chevron-left"></i></a>
-			<ul class="LeftSection">
-				<li>
-					<a href="#detect_module">Detect Module</i></a>
-				</li>
-			</ul>
-			<hr class="">
-			<a class="LeftTitle" href="#event"><i class="fa fa-code"></i> Event <i class="fa fa-chevron-left"></i></a>
-			<ul class="LeftSection">
-				<li>
-					<a href="#$.Event"><i class="fa fa-usd"></i>.Event</a>
-				</li>
-				<li>
-					<a href="#$.Proxy"><i class="fa fa-usd"></i>.Proxy</a>
-				</li>
-				<li>
-					<a href="#bind">bind</i></a>
-				</li>
-				<li>
-					<a href="#delegate">delegate</i></a>
-				</li>
-				<li>
-					<a href="#die">die</i></a>
-				</li>
-				<!--<li>
+<body class="">
+	<div class="Wrapper" style="display: none;" class="">
+		<aside class="Left SidebarHolder">
+			<div class="Sidebar">
+				<a class="LeftTitle" href="#">Yaex <span class="Version" title="This feature is only available in Yaex (0.10)">(0.10)</span> <i class="fa fa-chevron-left"></i></a>
+				<ul class="LeftSection Top">
+					<li>
+						<a href="#about"><i class="fa fa-question-circle"></i> About <i class="fa fa-ellipsis-v"></i></a>
+					</li>
+					<li>
+						<a href="#download"><i class="fa fa-download"></i> Download <i class="fa fa-ellipsis-v"></i></a>
+					</li>
+					<li>
+						<a href="#browsers"><i class="fa fa-globe"></i> Browser Support <i class="fa fa-ellipsis-v"></i></a>
+					</li>
+					<li>
+						<a href="#modules"><i class="fa fa-cogs"></i> Modules <i class="fa fa-ellipsis-v"></i></a>
+					</li>
+					<li>
+						<a href="#changelog"><i class="fa fa-pencil-square-o"></i> Change Log <i class="fa fa-ellipsis-v"></i></a>
+					</li>
+					<li>
+						<a href="#developer"><i class="fa fa-users"></i> Developers <i class="fa fa-ellipsis-v"></i></a>
+					</li>
+					<li>
+						<a href="#acknowledgements"><i class="fa fa-asterisk"></i> Acknowledgements <i class="fa fa-ellipsis-v"></i></a>
+					</li>
+				</ul>
+				<hr class="">
+				<a class="LeftTitle" href="#core"><i class="fa fa-code"></i> Core <i class="fa fa-chevron-left"></i></a>
+				<ul class="LeftSection" data-module="Core">
+					<li>
+						<a href="#$"><i class="fa fa-usd"></i></a>
+					</li>
+					<li>
+						<a href="#$()"><i class="fa fa-usd"></i>()</a>
+					</li>
+					<li>
+						<a href="#$.camelCase"><i class="fa fa-usd"></i>.camelCase</a>
+					</li>
+					<li>
+						<a href="#$.Contains"><i class="fa fa-usd"></i>.Contains</a>
+					</li>
+					<li>
+						<a href="#$.Each"><i class="fa fa-usd"></i>.Each</a>
+					</li>
+					<li>
+						<a href="#$.Extend"><i class="fa fa-usd"></i>.Extend</a>
+					</li>
+					<li>
+						<a href="#$.FN"><i class="fa fa-usd"></i>.FN</a>
+					</li>
+					<li>
+						<a href="#$.Grep"><i class="fa fa-usd"></i>.Grep</a>
+					</li>
+					<li>
+						<a href="#$.inArray"><i class="fa fa-usd"></i>.inArray</a>
+					</li>
+					<li>
+						<a href="#$.isArray"><i class="fa fa-usd"></i>.isArray</a>
+					</li>
+					<li>
+						<a href="#$.isFunction"><i class="fa fa-usd"></i>.isFunction</a>
+					</li>
+					<li>
+						<a href="#$.isObject"><i class="fa fa-usd"></i>.isObject</a>
+					</li>
+					<li>
+						<a href="#$.isPlainObject"><i class="fa fa-usd"></i>.isPlainObject</a>
+					</li>
+					<li>
+						<a href="#$.isDocument"><i class="fa fa-usd"></i>.isDocument</a>
+					</li>
+					<li>
+						<a href="#$.isWindow"><i class="fa fa-usd"></i>.isWindow</a>
+					</li>
+					<li>
+						<a href="#$.isUndefined"><i class="fa fa-usd"></i>.isUndefined</a>
+					</li>
+					<li>
+						<a href="#$.isNumeric"><i class="fa fa-usd"></i>.isNumeric</a>
+					</li>
+					<li>
+						<a href="#$.isString"><i class="fa fa-usd"></i>.isString</a>
+					</li>
+					<li>
+						<a href="#$.isNull"><i class="fa fa-usd"></i>.isNull</a>
+					</li>
+					<li>
+						<a href="#$.isEmpty"><i class="fa fa-usd"></i>.isEmpty</a>
+					</li>
+					<li>
+						<a href="#$.Map"><i class="fa fa-usd"></i>.Map</a>
+					</li>
+					<li>
+						<a href="#$.GetWindow"><i class="fa fa-usd"></i>.GetWindow</a>
+					</li>
+					<li>
+						<a href="#$.ParseJSON"><i class="fa fa-usd"></i>.ParseJSON</a>
+					</li>
+					<li>
+						<a href="#$.ParseJSON"><i class="fa fa-usd"></i>.ParseXML</a>
+					</li>
+					<li>
+						<a href="#$.ParseJSON"><i class="fa fa-usd"></i>.ParseHTML</a>
+					</li>
+					<li>
+						<a href="#$.Trim"><i class="fa fa-usd"></i>.Trim</a>
+					</li>
+					<li>
+						<a href="#$.Type"><i class="fa fa-usd"></i>.Type</a>
+					</li>
+					<li>
+						<a href="#$.ArrayToObject"><i class="fa fa-usd"></i>.ArrayToObject</a>
+					</li>
+					<li>
+						<a href="#$.IntoArray"><i class="fa fa-usd"></i>.IntoArray</a>
+					</li>
+					<li>
+						<a href="#$.ObjectToArray"><i class="fa fa-usd"></i>.ObjectToArray</a>
+					</li>
+					<li>
+						<a href="#$.Access"><i class="fa fa-usd"></i>.Access</a>
+					</li>
+					<li>
+						<a href="#$.CSS"><i class="fa fa-usd"></i>.CSS</a>
+					</li>
+					<li>
+						<a href="#$.Style"><i class="fa fa-usd"></i>.Style</a>
+					</li>
+					<li>
+						<a href="#$.Swap"><i class="fa fa-usd"></i>.Swap</a>
+					</li>
+					<li>
+						<a href="#$.NodeName"><i class="fa fa-usd"></i>.NodeName</a>
+					</li>
+					<li>
+						<a href="#$.JSON_Stringify"><i class="fa fa-usd"></i>.JSON_Stringify</a>
+					</li>
+					<li>
+						<a href="#$.Noop"><i class="fa fa-usd"></i>.Noop</a>
+					</li>
+					<li>
+						<a href="#$.Location"><i class="fa fa-usd"></i>.Location</a>
+					</li>
+					<li>
+						<a href="#$.Globals"><i class="fa fa-usd"></i>.Globals</a>
+					</li>
+					<li>
+						<a href="#$.Now"><i class="fa fa-usd"></i>.Now</a>
+					</li>
+					<li>
+						<a href="#$.Support"><i class="fa fa-usd"></i>.Support</a>
+					</li>
+					<li>
+						<a href="#$.Error"><i class="fa fa-usd"></i>.Error</a>
+					</li>
+					<li>
+						<a href="#$.VarDump"><i class="fa fa-usd"></i>.VarDump</a>
+					</li>
+					<li>
+						<a href="#$.GUID"><i class="fa fa-usd"></i>.GUID</a>
+					</li>
+					<li>
+						<a href="#$.UUID"><i class="fa fa-usd"></i>.UUID</a>
+					</li>
+					<li>
+						<a href="#$.PushStack"><i class="fa fa-usd"></i>.PushStack</a>
+					</li>
+					<li>
+						<a href="#$.RandomNumber"><i class="fa fa-usd"></i>.RandomNumber</a>
+					</li>
+					<li>
+						<a href="#$.DeserializeValue"><i class="fa fa-usd"></i>.DeserializeValue</a>
+					</li>
+					<li>
+						<a href="#$.Unique"><i class="fa fa-usd"></i>.Unique</a>
+					</li>
+					<li>
+						<a href="#add">add</a>
+					</li>
+					<li>
+						<a href="#addClass">addClass</a>
+					</li>
+					<li>
+						<a href="#after">after</a>
+					</li>
+					<li>
+						<a href="#appendTo">appendTo</a>
+					</li>
+					<li>
+						<a href="#attr">attr</a>
+					</li>
+					<li>
+						<a href="#before">before</a>
+					</li>
+					<li>
+						<a href="#children">children</a>
+					</li>
+					<li>
+						<a href="#clone">clone</a>
+					</li>
+					<li>
+						<a href="#closest">closest</a>
+					</li>
+					<li>
+						<a href="#concat">concat</a>
+					</li>
+					<li>
+						<a href="#contents">contents</a>
+					</li>
+					<li>
+						<a href="#css">css</a>
+					</li>
+					<li>
+						<a href="#data">data</a>
+					</li>
+					<li>
+						<a href="#each">each</a>
+					</li>
+					<li>
+						<a href="#empty">empty</a>
+					</li>
+					<li>
+						<a href="#eq">eq</a>
+					</li>
+					<li>
+						<a href="#filter">filter</a>
+					</li>
+					<li>
+						<a href="#find">find</a>
+					</li>
+					<li>
+						<a href="#first">first</a>
+					</li>
+					<li>
+						<a href="#forEach">forEach</a>
+					</li>
+					<li>
+						<a href="#get">get</a>
+					</li>
+					<li>
+						<a href="#has">has</a>
+					</li>
+					<li>
+						<a href="#hasClass">hasClass</a>
+					</li>
+					<li>
+						<a href="#height">height</a>
+					</li>
+					<li>
+						<a href="#hide">hide</a>
+					</li>
+					<li>
+						<a href="#html">html</a>
+					</li>
+					<li>
+						<a href="#index">index</a>
+					</li>
+					<li>
+						<a href="#indexOf">indexOf</a>
+					</li>
+					<li>
+						<a href="#innerHeight">innerHeight</a>
+					</li>
+					<li>
+						<a href="#innerWidth">innerWidth</a>
+					</li>
+					<li>
+						<a href="#insertAfter">insertAfter</a>
+					</li>
+					<li>
+						<a href="#insertBefore">insertBefore</a>
+					</li>
+					<li>
+						<a href="#is">is</a>
+					</li>
+					<li>
+						<a href="#last">last</a>
+					</li>
+					<li>
+						<a href="#map">map</a>
+					</li>
+					<li>
+						<a href="#next">next</a>
+					</li>
+					<li>
+						<a href="#not">not</a>
+					</li>
+					<li>
+						<a href="#offset">offset</a>
+					</li>
+					<li>
+						<a href="#offsetParent">offsetParent</a>
+					</li>
+					<li>
+						<a href="#outerHeight">outerHeight</a>
+					</li>
+					<li>
+						<a href="#outerWidth">outerWidth</a>
+					</li>
+					<li>
+						<a href="#parent">parent</a>
+					</li>
+					<li>
+						<a href="#parents">parents</a>
+					</li>
+					<li>
+						<a href="#position">position</a>
+					</li>
+					<li>
+						<a href="#pluck">pluck</a>
+					</li>
+					<li>
+						<a href="#prepend">prepend</a>
+					</li>
+					<li>
+						<a href="#prependTo">prependTo</a>
+					</li>
+					<li>
+						<a href="#prev">prev</a>
+					</li>
+					<li>
+						<a href="#prop">prop</a>
+					</li>
+					<li>
+						<a href="#push">push</a>
+					</li>
+					<li>
+						<a href="#ready">ready</a>
+					</li>
+					<li>
+						<a href="#reduce">reduce</a>
+					</li>
+					<li>
+						<a href="#remove">remove</a>
+					</li>
+					<li>
+						<a href="#removeAttr">removeAttr</a>
+					</li>
+					<li>
+						<a href="#removeClass">removeClass</a>
+					</li>
+					<li>
+						<a href="#replaceWith">replaceWith</a>
+					</li>
+					<li>
+						<a href="#scrollLeft">scrollLeft</a>
+					</li>
+					<li>
+						<a href="#scrollTop">scrollTop</a>
+					</li>
+					<li>
+						<a href="#show">show</a>
+					</li>
+					<li>
+						<a href="#siblings">siblings</a>
+					</li>
+					<li>
+						<a href="#size">size</a>
+					</li>
+					<li>
+						<a href="#slice">slice</a>
+					</li>
+					<li>
+						<a href="#text">text</a>
+					</li>
+					<li>
+						<a href="#toggle">toggle</a>
+					</li>
+					<li>
+						<a href="#title">title</a>
+					</li>
+					<li>
+						<a href="#toggleClass">toggleClass</a>
+					</li>
+					<li>
+						<a href="#unwrap">unwrap</a>
+					</li>
+					<li>
+						<a href="#value">value</a>
+					</li>
+					<li>
+						<a href="#width">width</a>
+					</li>
+					<li>
+						<a href="#wrap">wrap</a>
+					</li>
+					<li>
+						<a href="#wrapAll">wrapAll</a>
+					</li>
+					<li>
+						<a href="#wrapInner">wrapInner</a>
+					</li>
+				</ul>
+				<hr class="">
+				<a class="LeftTitle" href="#detect"><i class="fa fa-code"></i> Detect <i class="fa fa-chevron-left"></i></a>
+				<ul class="LeftSection" data-module="Detect">
+					<li>
+						<a href="#detect_module">Detect Module</i></a>
+					</li>
+				</ul>
+				<hr class="">
+				<a class="LeftTitle" href="#event"><i class="fa fa-code"></i> Event <i class="fa fa-chevron-left"></i></a>
+				<ul class="LeftSection" data-module="Event">
+					<li>
+						<a href="#$.Event"><i class="fa fa-usd"></i>.Event</a>
+					</li>
+					<li>
+						<a href="#$.Proxy"><i class="fa fa-usd"></i>.Proxy</a>
+					</li>
+					<li>
+						<a href="#bind">bind</i></a>
+					</li>
+					<li>
+						<a href="#delegate">delegate</i></a>
+					</li>
+					<li>
+						<a href="#die">die</i></a>
+					</li>
+					<!--<li>
 					<a href="#event.isDefaultPrevented">event.isDefaultPrevented</i></a>
 				</li>-->
-				<!--<li>
+					<!--<li>
 					<a href="#event.isImmediatePropagationStopped">event.isImmediatePropagationStopped</i></a>
 				</li>-->
-				<!--<li>
+					<!--<li>
 					<a href="#event.isPropagationStopped">event.isPropagationStopped</i></a>
 				</li>-->
-				<li>
-					<a href="#live">live</i></a>
-				</li>
-				<li>
-					<a href="#off">off</i></a>
-				</li>
-				<li>
-					<a href="#on">on</i></a>
-				</li>
-				<li>
-					<a href="#one">one</i></a>
-				</li>
-				<li>
-					<a href="#trigger">trigger</i></a>
-				</li>
-				<li>
-					<a href="#triggerHandler">triggerHandler</i></a>
-				</li>
-				<li>
-					<a href="#unbind">unbind</i></a>
-				</li>
-				<li>
-					<a href="#undelegate">undelegate</i></a>
-				</li>
-			</ul>
-			<hr class="">
-			<a class="LeftTitle" href="#ajax"><i class="fa fa-code"></i> Ajax <i class="fa fa-chevron-left"></i></a>
-			<ul class="LeftSection">
-				<li>
-					<a href="#$.Ajax"><i class="fa fa-usd"></i>.Ajax</a>
-				</li>
-				<li>
-					<a href="#$.AjaxJSONP"><i class="fa fa-usd"></i>.AjaxJSONP</a>
-				</li>
-				<li>
-					<a href="#$.AjaxSettings"><i class="fa fa-usd"></i>.AjaxSettings</a>
-				</li>
-				<li>
-					<a href="#$.Get"><i class="fa fa-usd"></i>.Get</a>
-				</li>
-				<li>
-					<a href="#$.GetJSON"><i class="fa fa-usd"></i>.GetJSON</a>
-				</li>
-				<li>
-					<a href="#$.Param"><i class="fa fa-usd"></i>.Param</a>
-				</li>
-				<li>
-					<a href="#$.Post"><i class="fa fa-usd"></i>.Post</a>
-				</li>
-				<li>
-					<a href="#load">load</i></a>
-				</li>
-			</ul>
-			<hr class="">
-			<a class="LeftTitle" href="#form"><i class="fa fa-code"></i> Form <i class="fa fa-chevron-left"></i></a>
-			<ul class="LeftSection">
-				<li>
-					<a href="#serialise">serialise</i></a>
-				</li>
-				<li>
-					<a href="#serialiseArray">serialiseArray</i></a>
-				</li>
-				<li>
-					<a href="#submit">submit</i></a>
-				</li>
-			</ul>
-			<hr class="">
-			<a class="LeftTitle" href="#effects"><i class="fa fa-code"></i> Effects <i class="fa fa-chevron-left"></i></a>
-			<ul class="LeftSection">
-				<li>
-					<a href="#$.FX"><i class="fa fa-usd"></i>.FX</a>
-				</li>
-				<li>
-					<a href="#animate">animate</i></a>
-				</li>
-			</ul>
-			<hr class="">
-			<a class="LeftTitle" href="#touch"><i class="fa fa-code"></i> Touch <i class="fa fa-chevron-left"></i></a>
-			<ul class="LeftSection">
-				<li>
-					<a href="#touch_events">Touch Events</i></a>
-				</li>
-			</ul>
-		</div>
-	</aside>
-	<div class="Right">
-		<div class="Container">
+					<li>
+						<a href="#live">live</i></a>
+					</li>
+					<li>
+						<a href="#off">off</i></a>
+					</li>
+					<li>
+						<a href="#on">on</i></a>
+					</li>
+					<li>
+						<a href="#one">one</i></a>
+					</li>
+					<li>
+						<a href="#trigger">trigger</i></a>
+					</li>
+					<li>
+						<a href="#triggerHandler">triggerHandler</i></a>
+					</li>
+					<li>
+						<a href="#unbind">unbind</i></a>
+					</li>
+					<li>
+						<a href="#undelegate">undelegate</i></a>
+					</li>
+				</ul>
+				<hr class="">
+				<a class="LeftTitle" href="#ajax"><i class="fa fa-code"></i> Ajax <i class="fa fa-chevron-left"></i></a>
+				<ul class="LeftSection" data-module="Ajax">
+					<li>
+						<a href="#$.Ajax"><i class="fa fa-usd"></i>.Ajax</a>
+					</li>
+					<li>
+						<a href="#$.AjaxJSONP"><i class="fa fa-usd"></i>.AjaxJSONP</a>
+					</li>
+					<li>
+						<a href="#$.AjaxSettings"><i class="fa fa-usd"></i>.AjaxSettings</a>
+					</li>
+					<li>
+						<a href="#$.Get"><i class="fa fa-usd"></i>.Get</a>
+					</li>
+					<li>
+						<a href="#$.GetJSON"><i class="fa fa-usd"></i>.GetJSON</a>
+					</li>
+					<li>
+						<a href="#$.Param"><i class="fa fa-usd"></i>.Param</a>
+					</li>
+					<li>
+						<a href="#$.Post"><i class="fa fa-usd"></i>.Post</a>
+					</li>
+					<li>
+						<a href="#load">load</i></a>
+					</li>
+				</ul>
+				<hr class="">
+				<a class="LeftTitle" href="#form"><i class="fa fa-code"></i> Form <i class="fa fa-chevron-left"></i></a>
+				<ul class="LeftSection" data-module="Form">
+					<li>
+						<a href="#serialise">serialise</i></a>
+					</li>
+					<li>
+						<a href="#serialiseArray">serialiseArray</i></a>
+					</li>
+					<li>
+						<a href="#submit">submit</i></a>
+					</li>
+				</ul>
+				<hr class="">
+				<a class="LeftTitle" href="#effects"><i class="fa fa-code"></i> Effects <i class="fa fa-chevron-left"></i></a>
+				<ul class="LeftSection" data-module="FX">
+					<li>
+						<a href="#$.FX"><i class="fa fa-usd"></i>.FX</a>
+					</li>
+					<li>
+						<a href="#animate">animate</i></a>
+					</li>
+				</ul>
+				<hr class="">
+				<a class="LeftTitle" href="#touch"><i class="fa fa-code"></i> Touch <i class="fa fa-chevron-left"></i></a>
+				<ul class="LeftSection" data-module="Touch">
+					<li>
+						<a href="#touch_events">Touch Events</i></a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+		<div class="Right ContainerHolder">
+			<div class="Image">
+				<a id="Logo"></a>
+			</div>
+			<div class="Container">
+				<header>
+					<p>
+						<strong>Yaex </strong>is a
+						<strong>JavaScript library for modern browsers </strong>with a largely
+						<strong>jQuery/Zepto compatible API </strong>. If you use jQuery/Zepto, you already know how to use Yaex.
+					</p>
+
+					<p>
+						While 100% jQuery/Zepto coverage is not a design goal, the
+						<strong>APIs provided match their jQuery/Zepto counterparts </strong>. The goal is to have a small modular library that
+						<strong>downloads and executes fast </strong>, with a
+						<strong>familiar and versatile API </strong>, so you can
+						<strong>concentrate on getting stuff done </strong>.
+					</p>
+
+					<p>
+						Yaex is open source software and is released under the developer and business-friendly
+						<a href="https://github.com/KodeBurner/Yaex/blob/master/LICENSE">MIT license</a>.
+					</p>
+				</header>
+
+				<h3 id="download">Download <i class="fa fa-chevron-left"></i>
+				</h3>
+
+				<p>
+					The default build includes the following modules:
+					<br>
+					<em>Core, Ajax, Event, Form, IE</em>.
+				</p>
+
+				<div class="alert alert-info">
+					Yaex v0.10 used to bundle Effects, IOS, and Detect modules in the default build.
+					<br>See below for
+					<a href="#modules">Optional Modules</a>.
+				</div>
+
+				<ul class="Downloads">
+					<li>
+						<a href="http://mefso.org/products/yaex_core_src.js" class="btn btn-primary">yaex_core_src.js v0.10 (for development)</a>
+						– <i>120.21 KB uncompressed, lots of comments</i>
+					</li>
+					<li>
+						<a href="http://mefso.org/products/yaex_core_min.js" class="btn btn-primary">yaex_core_min.js v0.10 (for production)</a>
+						– <i>40.1 KB when gzipped</i>
+					</li>
+				</ul>
+
+				<p>
+					Or <b><a href="https://github.com/KodeBurner/Yaex">grab the latest version on GitHub</a></b>.
+				</p>
+
+				<p>
+					Include Yaex with a script tag near the end of your page:
+				</p>
+
+<textarea id="CodePlace">...
+<script src="yaex_core_min.js"></script>
+</body>
+</html></textarea>
+
+				<div class="LineBreak"></div>
+
+				<div class="alert alert-warning"><i class="fa fa-info-circle"></i> Yaex will only set the
+					<code>$</code> global to itself if it is not yet defined. There is no
+					<code>Yaex.noConflict</code> method.
+				</div>
+
+				<p>
+					<b>If you need to support older browers, like Internet Explorer 9
+					and lower, you can fall back to jQuery 1.x.</b>
+				</p>
+
+				<h3 id="browsers">Browser Support <i class="fa fa-chevron-left"></i>
+				</h3>
+
+				<h4>Primary (100% support)</h4>
+				<ul>
+					<li>Safari 6+ (Mac)</li>
+					<li>Chrome 30+ (Windows, Mac, Android, iOS, Linux, Chrome OS)</li>
+					<li>Firefox 24+ (Windows, Mac, Android, Linux, Firefox OS)</li>
+					<li>iOS 5+ Safari</li>
+					<li>Android 2.3+ Browser</li>
+					<li>Internet Explorer 10+ (Windows, Windows Phone)</li>
+				</ul>
+
+				<h4>Secondary targets (fully or mostly supported)</h4>
+				<ul>
+					<li>iOS 3+ Safari</li>
+					<li>Chrome &lt;30</li>
+					<li>Firefox 4+</li>
+					<li>Safari &lt;6</li>
+					<li>Android Browser 2.2</li>
+					<li>Opera 10+</li>
+					<li>webOS 1.4.5+ Browser</li>
+					<li>BlackBerry Tablet OS 1.0.7+ Browser</li>
+					<li>Amazon Silk 1.0+</li>
+					<li>Other WebKit-based browsers/runtimes</li>
+				</ul>
+
+				<p>
+					<em>Note that some optional features of Yaex specifically target mobile browsers; as the original project goal was to specifically provide a leaner alternative to jQuery/Zepto for the mobile web.</em>
+				</p>
+
+				<p>
+					Yaex is a good choice for browser extensions (for Safari, Chrome and Firefox) and to develop HTML-based views within native app frameworks, such as <a href="http://phonegap.com/">PhoneGap</a>.
+				</p>
+
+				<p>
+					In short, Yaex is expected to work in every modern browser and browser-like environment. Yaex doesn't support old Internet Explorer versions (&lt;10).
+				</p>
+
+				<h3>Manually Building <i class="fa fa-chevron-left"></i>
+				</h3>
+
+				<p>
+					<code>yyaex_core_src.js</code> and
+					<code>yaex_core_min.js</code> provided above can be used as-is. However, for best efficiency and customizability, run the build system that comes with Yaex's source code. It allows you to select modules, run tests, use <a href="https://github.com/mishoo/UglifyJS">UglifyJS</a> to minify your custom build, and gives you an estimate on the compression that is achievable when
+					<code>yaex_core_min.js</code> is served gzipped.
+				</p>
+
+				<p>
+					Refer to <a href="https://github.com/KodeBurner/Yaex#readme">the README</a>
+					for instructions on how to build Yaex, including running the tests and contributing patches.
+				</p>
+
+				<h3 id="modules">Modules <i class="fa fa-chevron-left"></i>
+				</h3>
+
+
+				<h3 id="modules">Change Log <i class="fa fa-chevron-left"></i>
+				</h3>
+
+				<h3 id="developers">Developers <i class="fa fa-chevron-left"></i>
+				</h3>
+
+				<h3 id="acknowledgements">Acknowledgements <i class="fa fa-chevron-left"></i>
+				</h3>
+
+			</div>
 		</div>
 	</div>
+	<script>
+	<!--
+		Yaex(document).ready(function ($) {
+			var ReflowTimeout;
+
+			if (ReflowTimeout) {
+				clearTimeout(ReflowTimeout);
+			}
+
+			ReflowTimeout = setTimeout(ReflowFixedPositions, 200);
+
+			var InjectScript = function (src) {
+				var script = document.createElement('script');
+				script.src = src;
+				script.async = true;
+				Yaex('script').first().before(script);
+			};
+
+			var ReflowFixedPositions = function () {
+				var docStyle = document.documentElement.style;
+				
+				docStyle.paddingRight = '1px';
+				docStyle.zoom = '1';
+				
+				setTimeout(function () {
+					docStyle.paddingRight = '1px';
+					docStyle.zoom = '1';
+				}, 0);
+			};
+
+			Yaex(document).on('mouseover', 'span.version', function(){
+				var el = Yaex(this);
+				
+				if (!el.attr('title')) {
+					el.attr('title', 'This feature is only available in Yaex ' + el.text());
+				}
+			});
+
+			if (/^localhost|\.(dev|local)$/.test(location.hostname)) {
+				var ScriptPath = 'http://' + location.hostname + '/Yaex/docs/assets/javascript/';
+				InjectScript(ScriptPath + 'javascript/javascript.js');
+			}
+
+			Yaex(window).on('scroll', function () {
+				if (ReflowTimeout) {
+					clearTimeout(ReflowTimeout);
+				}
+
+				ReflowTimeout = setTimeout(ReflowFixedPositions, 200);
+			});
+
+			Yaex('.Wrapper').fadeToggle(500);
+
+			Yaex('.Wrapper div').AutoFix();
+
+			Yaex('.Left').Scrollbar({
+				useBothWheelAxes: false,
+				suppressScrollY: false,
+				suppressScrollX: true,
+				wheelPropagation: true,
+				useKeyboard: true,
+				wheelSpeed: 10,
+				scrollYMarginOffset: 20
+			});
+
+			Yaex('.Right').Scrollbar({
+				useBothWheelAxes: false,
+				suppressScrollY: false,
+				suppressScrollX: true,
+				wheelPropagation: true,
+				useKeyboard: true,
+				wheelSpeed: 10,
+				scrollYMarginOffset: 20
+			});
+
+			Yaex('.alert').alert();
+			Yaex('.btn').button();
+
+			var CodePlace = Yaex('#CodePlace');
+
+			var CodeViewer = CodeMirror.fromTextArea(CodePlace[0], {
+				lineNumbers: true,
+				readOnly: true,
+				autofocus: false,
+				dragDrop: false,
+				theme: 'ambiance'
+			});
+		});
+	-->
+	</script>
 </body>
 </html>

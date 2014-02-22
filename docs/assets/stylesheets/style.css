@@ -1,55 +1,39 @@
 @import'font-awesome.css';
-@import'codemirror.css';
 
 @font-face {
 	font-weight: normal;
 	font-style: normal;
-	font-family: 'OpenSansLight';
+	font-family:'OpenSansLight';
 	src: url('../fonts/OpenSans-Light-webfont.eot');
-	src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
-		 url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'),
-		 url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+	src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Light-webfont.woff') format('woff'), url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'), url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
 }
-
 @font-face {
 	font-weight: normal;
 	font-style: normal;
-	font-family: 'OpenSansRegular';
+	font-family:'OpenSansRegular';
 	src: url('../fonts/OpenSans-Regular-webfont.eot');
-	src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
-		 url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
-		 url('../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+	src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Regular-webfont.woff') format('woff'), url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'), url('../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
 }
-
 @font-face {
 	font-weight: normal;
 	font-style: normal;
-	font-family: 'OpenSansSemibold';
+	font-family:'OpenSansSemibold';
 	src: url('../fonts/OpenSans-Semibold-webfont.eot');
-	src: url('../fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/OpenSans-Semibold-webfont.woff') format('woff'),
-		 url('../fonts/OpenSans-Semibold-webfont.ttf') format('truetype'),
-		 url('../fonts/OpenSans-Semibold-webfont.svg#OpenSansSemibold') format('svg');
+	src: url('../fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Semibold-webfont.woff') format('woff'), url('../fonts/OpenSans-Semibold-webfont.ttf') format('truetype'), url('../fonts/OpenSans-Semibold-webfont.svg#OpenSansSemibold') format('svg');
 }
-
 @font-face {
 	font-weight: normal;
 	font-style: normal;
-	font-family: 'OpenSansBold';
+	font-family:'OpenSansBold';
 	src: url('../fonts/OpenSansBold-webfont.eot');
-	src: url('../fonts/OpenSansBold-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/OpenSansBold-webfont.woff') format('woff'),
-		 url('../fonts/OpenSansBold-webfont.ttf') format('truetype'),
-		 url('../fonts/OpenSansBold-webfont.svg#OpenSansBold') format('svg');
-
+	src: url('../fonts/OpenSansBold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSansBold-webfont.woff') format('woff'), url('../fonts/OpenSansBold-webfont.ttf') format('truetype'), url('../fonts/OpenSansBold-webfont.svg#OpenSansBold') format('svg');
 }
 
 * {
 	margin: 0;
 	padding: 0;
 }
+
 html, body {
 	display: table;
 	overflow: hidden;
@@ -57,22 +41,50 @@ html, body {
 	padding: 0;
 	width: 100%;
 	height: 100%;
-	background: rgb(238, 238, 236);
-	color: rgb(80, 80, 80);
+	background: rgb(248, 248, 246);
+	color: rgb(46, 52, 54);
 	font-size: 14px;
 	line-height: 22px;
 	/*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
-	font-family: 'OpenSansRegular';
+	font-family:'OpenSansRegular';
 	-webkit-text-size-adjust: none;
 }
-a:link {
+a:link, a:visited {
+	color: rgba(22, 71, 134, .9);
 	text-decoration: none;
 }
-a:hover {
+a:hover, a:active {
+	outline: 0;
+	color: rgba(52, 101, 164, .9);
 	text-decoration: underline;
 }
 a[href="#"] {
 	-webkit-touch-callout: none;
+}
+p {
+	margin: 20px 0;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	font-weight: normal;
+	font-family:'OpenSansSemiBold';
+	line-height: 30px;
+}
+h1:first-child {
+	margin-top: 0;
+	padding-top: 0;
+	font-weight: 200;
+	font-size: 2.2em;
+}
+img[src^=logo] {
+	max-width: 100%;
+}
+h2 {
+	padding-bottom: .5em;
+	font-size: 20px;
+}
+h4 {
+	font-size: 16px;
 }
 img {
 	border: 0;
@@ -87,39 +99,56 @@ hr {
 	/*background: rgba(0, 0, 0, .2);*/
 	background-image: linear-gradient(90deg, rgba(12, 61, 124, .1), rgba(12, 61, 124, .6), rgba(12, 61, 124, .1));
 }
+code, pre, tt {
+	font-weight: normal;
+	font-size: 14px;
+	font-family: 'Monaco', monospace 'Consolas', 'Lucida Console';
+}
+code {
+	padding: 1px 3px;
+	border-radius: 3px;
+	background-color: rgba(211, 215, 207, .4);
+	color: rgba(85, 87, 83, .75);
+}
+.Wrapper {
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	width: 960px;
+	height: 100%;
+}
 .Left {
-	position: absolute;
+	position: relative;
 	top: 0;
 	bottom: 0;
-	left: 0;
 	z-index: 2;
 	display: block;
 	float: left;
-	overflow: auto;
+	overflow-y: auto;
 	margin: 0 auto;
 	padding: 0;
 	width: 219px;
 	border-right: 1px solid rgb(32, 81, 144);
 	background: rgb(120, 120, 120);
-	box-shadow: 0 0 30px rgba(0, 0, 0, .2);
-	/*background: linear-gradient(90deg, rgba(110, 110, 110, .9) 30%, rgba(110, 110, 110, .9) 30%, rgba(100, 100, 100, .9));*/
 	background-image: linear-gradient(90deg, rgba(52, 101, 164, .7), rgba(52, 101, 164, .9), rgba(52, 101, 164, .7));
+	box-shadow: 0 0 30px rgba(0, 0, 0, .2);
 	-webkit-overflow-scrolling: touch;
 }
 .Right {
-	position: absolute;
+	position: relative;
 	top: 0;
-	right: 0;
 	bottom: 0;
-	left: 220px;
 	z-index: 1;
 	display: block;
 	float: right;
 	margin: 0 auto;
+	margin-left: 220px !important;
 	padding: 0;
-	width: 100%;
+	width: 739px;
+	border-right: 1px solid rgb(228, 228, 226);
 	border-left: 1px solid rgb(255, 255, 255);
 	background: rgb(238, 238, 236);
+	box-shadow: 0 0 30px rgba(0, 0, 0, .1);
 	-webkit-overflow-scrolling: touch;
 }
 .Sidebar {
@@ -139,12 +168,12 @@ hr {
 	height: 30px;
 	text-decoration: none;
 	font-size: 16px;
-	font-family: 'OpenSansSemibold';
+	font-family:'OpenSansSemibold';
 	line-height: 30px;
 }
 .Sidebar a.LeftTitle span.Version {
 	font-size: 14px;
-	font-family: 'OpenSansLight';
+	font-family:'OpenSansLight';
 }
 .Sidebar a.LeftTitle i:nth-child(2) {
 	float: right;
@@ -161,6 +190,15 @@ hr {
 	display: block;
 	height: 25px;
 }
+.Sidebar ul.LeftSection li a i:nth-child(2) {
+	float: right;
+	margin-top: 8px;
+	margin-right: 3px;
+	color: rgb(0, 0, 0);
+	text-shadow: -1px 1px 0 rgba(255, 255, 255, .5);
+	font-size: 12px;
+	opacity: .1;
+}
 .Sidebar ul.LeftSection li:hover {
 }
 .Sidebar ul.LeftSection li a:link, .Sidebar ul.LeftSection li a:visited {
@@ -170,7 +208,7 @@ hr {
 	text-shadow: 0 -1px 1px rgba(0, 0, 0, .2);
 	letter-spacing: 1px;
 	font-size: 14px;
-	font-family: 'OpenSansLight';
+	font-family:'OpenSansLight';
 }
 .Sidebar ul.LeftSection li a:hover {
 	border-radius: 3px;
@@ -213,8 +251,126 @@ hr {
 	line-height: 10px;
 }
 .Container {
+	padding: 0 15px 0 15px;
+	color: rgba(46, 52, 54, .7);
+}
+.Container textarea {
+}
+.Container header {
+}
+.Container .LineBreak {
+	display: inline-block;
+	margin-top: 5px;
+	width: 100%;
+	height: 10px;
+}
+.Right .Image {
+	margin: 0 auto;
+	width: 100%;
+	border-bottom: 1px dashed rgba(32, 74, 135, .1);
+	background: linear-gradient(rgba(255, 255, 255, .0), rgba(255, 255, 255, .2));
+	box-shadow: 0 0 60px rgba(0, 0, 0, .03);
+}
+.Right .Image a#Logo {
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	height: 225px;
+	background: transparent url('../images/yaexlogo-01.png') center center no-repeat;
+}
+.Container ul.Downloads {
+	padding-left: 0;
+	list-style-type: none;
+}
+.Container ul.Downloads li {
+	margin: 10px 0;
+}
+.Container a.Download {
+	display: inline-block;
+	padding: 4px 10px;
+	border: 1px solid #a8a8af;
+	border-radius: 2px;
+	background: #fff;
+	background: linear-gradient(rgba(0, 0, 32, 0.01), rgba(0, 0, 32, 0.08));
+	color: #202028;
+	text-decoration: none !important;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9);
+	font-weight: bold;
+	font-size: 14px;
+	font-family: helvetica, arial, sans-serif;
+	line-height: 19px;
+	cursor: pointer;
+	-webkit-user-select: none;
+}
+.Container a.Download:hover {
+	border-color: #707078;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 32, 0.01)), to(rgba(0, 0, 32, 0.16)));
+	background-image: -moz-linear-gradient(rgba(0, 0, 32, 0.01), rgba(0, 0, 32, 0.16));
+	color: #202028;
+}
+.Container a.Download:active {
+	background-color: rgba(0, 0, 32, 0.05);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 32, 0.16)), to(rgba(0, 0, 32, 0.01)));
+	background-image: -moz-linear-gradient(rgba(0, 0, 32, 0.16), rgba(0, 0, 32, 0.01));
+	box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+.Container p.Important {
+	padding: 4px 10px;
+	border-radius: 5px;
+	background: rgba(254, 250, 220, .5);
+	color: rgba(91, 107, 122, .9);
+}
+.Container h3 {
+	margin-bottom: 10px;
+	height: 40px;
+	border-bottom: 1px dashed rgba(32, 74, 135, .15);
+	border-radius: 7px;
+	background: linear-gradient(90deg, rgba(255, 255, 255, .2), rgb(238, 238, 236));
+	box-shadow: 0 10px 30px rgba(0, 0, 0, .03);
+	color: rgba(32, 74, 135, .8);
+	text-indent: 10px;
+	text-transform: uppercase;
+	font-size: 26px;
+	font-family: Ubuntu, 'OpenSansSemibold';
+	line-height: 40px;
+}
+.Container h3 i {
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+	color: rgba(32, 74, 135, .1);
+	font-size: 14px;
 }
 .HideMe {
 	display: none !important;
 	visibility: hidden;
+}
+.SidebarHolder {
+	position: absolute;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 0;
+	width: 219px;
+}
+.ContainerHolder {
+	position: absolute;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 0;
+}
+.Container ul {
+	padding: 0 0 0 20px;
+	list-style-type: circle;
+}
+.Container li + li {
+	margin-top: .3em;
+}
+.Container li > ul {
+	margin-top: .3em;
+}
+.Container li li {
+	margin-top: 0;
+}
+.CodeMirror {
+	height: auto !important;
 }

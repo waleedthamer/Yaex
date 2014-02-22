@@ -12,8 +12,7 @@
 	var data = {};
 	var dataAttr = $.fn.data;
 	var camelize = $.camelCase;
-	// var exp = $.Expando = 'Yaex' + (+new Date());
-	var exp = $.Expando;//= 'Yaex' + ($.core_version + $.core_build + $.randomNumber(5, 12)).replace(/\D/g, '');
+	var exp = $.Expando + new Date();
 
 	/**
 	 Implementation Summary
@@ -39,9 +38,8 @@
 			}
 		});
 
-		// this.Expando = 'Yaex' + ($.core_version + Math.random()).replace(/\D/g, '');
-		this.Expando = 'Yaex' + ($.core_version + $.core_build + $.randomNumber(2, 5)).replace(/\D/g, '');
-		// this.Expando = Yaex.Expando + Math.random();
+		// this.Expando = 'Yaex' + ($.Version + $.BuildNumber + $.RandomNumber(10000, 70000)).replace(/\D/g, '');
+		this.Expando = $.Expando + Math.random();
 	}
 
 	Data.UID = 1;
@@ -412,7 +410,7 @@
 	function attributeData(node) {
 		var store = {};
 
-		$.each(node.attributes || $.emptyArray, function (i, attr) {
+		$.each(node.attributes || $.EmptyArray, function (i, attr) {
 			if (attr.name.indexOf('data-') == 0) {
 				store[camelize(attr.name.replace('data-', ''))] =
 					$.DeserializeValue(attr.value);

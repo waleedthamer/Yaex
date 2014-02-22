@@ -5,14 +5,15 @@
 		$.Extend({
 			Y: function (dom, selector) {
 				dom = dom || [];
-				$.Extend(dom, $.fn);
+				$.Extend(dom, $.Func);
 				dom.selector = selector || '';
-				dom.__Y = true;
+				dom._Y_ = true;
 				return dom;
 			},
-			// this is a kludge but works
-			isYaex: function (object) {
-				return $.type(object) === 'array' && '__Y' in object;
+
+			// This is a kludge but works
+			isY: function (object) {
+				return $.Type(object) === 'array' && '_Y_' in object;
 			}
 		});
 	}
