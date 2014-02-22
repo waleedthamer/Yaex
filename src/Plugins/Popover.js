@@ -6,17 +6,17 @@
 		this.init('popover', element, options);
 	};
 
-	if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js');
+	if (!$.fn.tooltip) throw new Error('Popover requires Tooltip.js');
 
-	Popover.DEFAULTS = $.Extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
+	Popover.DEFAULTS = $.Extend({}, $.fn.tooltip.constructor.DEFAULTS, {
 		placement: 'right',
 		trigger: 'click',
 		content: '',
 		template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
 	});
 
-	// NOTE: POPOVER EXTENDS tooltip.js
-	Popover.prototype = $.Extend({}, $.fn.tooltip.Constructor.prototype);
+	// NOTE: POPOVER EXTENDS Tooltip.js
+	Popover.prototype = $.Extend({}, $.fn.tooltip.constructor.prototype);
 
 	Popover.prototype.constructor = Popover;
 
@@ -61,10 +61,6 @@
 		return this.$tip;
 	};
 
-
-	// POPOVER PLUGIN DEFINITION
-	// var old = $.fn.popover;
-
 	$.fn.popover = function (option) {
 		return this.each(function () {
 			var $this = $(this);
@@ -76,11 +72,5 @@
 		});
 	};
 
-	$.fn.popover.Constructor = Popover;
-
-	// POPOVER NO CONFLICT
-	// $.fn.popover.noConflict = function () {
-	// 	$.fn.popover = old;
-	// 	return this;
-	// };
+	$.fn.popover.constructor = Popover;
 })(Yaex)

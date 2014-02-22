@@ -32,19 +32,19 @@
 		};
 	}());
 
-	$.fn.faScrollbar = function (suppliedSettings, option) {
+	$.fn.Scrollbar = function (SuppliedSettings, option) {
 
 		return this.each(function () {
 			// Use the default settings
 			var settings = $.Extend(true, {}, defaultSettings),
 				$this = $(this);
 
-			if (typeof suppliedSettings === 'object') {
+			if (typeof SuppliedSettings === 'object') {
 				// But over-ride any supplied
-				$.Extend(true, settings, suppliedSettings);
+				$.Extend(true, settings, SuppliedSettings);
 			} else {
 				// If no settings were supplied, then the first param must be the option
-				option = suppliedSettings;
+				option = SuppliedSettings;
 			}
 
 			// Catch options
@@ -286,28 +286,29 @@
 				
 				$this.bind('wheel' + eventClassName, function (e, deprecatedDelta, deprecatedDeltaX, deprecatedDeltaY) {
 					var deltaX = e.deltaX ? e.deltaX / 10 : deprecatedDeltaX,
-						deltaY = e.deltaY ? e.deltaY / 10 : deprecatedDeltaY;
+						deltaY = e.deltaY ? e.deltaY / 10 : deprecatedDeltaY,
+						WheelSpeed = ($.Browser.Firefox ? 60 : settings.wheelSpeed);
 
 					if (!settings.useBothWheelAxes) {
 						// deltaX will only be used for horizontal scrolling and deltaY will
 						// only be used for vertical scrolling - this is the default
-						$this.scrollTop($this.scrollTop() + (deltaY * settings.wheelSpeed));
-						$this.scrollLeft($this.scrollLeft() - (deltaX * settings.wheelSpeed));
+						$this.scrollTop($this.scrollTop() + (deltaY * WheelSpeed));
+						$this.scrollLeft($this.scrollLeft() - (deltaX * WheelSpeed));
 					} else if (scrollbarYActive && !scrollbarXActive) {
 						// only vertical scrollbar is active and useBothWheelAxes option is
 						// active, so let's scroll vertical bar using both mouse wheel axes
 						if (deltaY) {
-							$this.scrollTop($this.scrollTop() - (deltaY * settings.wheelSpeed));
+							$this.scrollTop($this.scrollTop() - (deltaY * WheelSpeed));
 						} else {
-							$this.scrollTop($this.scrollTop() + (deltaX * settings.wheelSpeed));
+							$this.scrollTop($this.scrollTop() + (deltaX * WheelSpeed));
 						}
 					} else if (scrollbarXActive && !scrollbarYActive) {
 						// useBothWheelAxes and only horizontal bar is active, so use both
 						// wheel axes for horizontal bar
 						if (deltaX) {
-							$this.scrollLeft($this.scrollLeft() + (deltaX * settings.wheelSpeed));
+							$this.scrollLeft($this.scrollLeft() + (deltaX * WheelSpeed));
 						} else {
-							$this.scrollLeft($this.scrollLeft() - (deltaY * settings.wheelSpeed));
+							$this.scrollLeft($this.scrollLeft() - (deltaY * WheelSpeed));
 						}
 					}
 
@@ -322,6 +323,7 @@
 
 				// fix Firefox scroll problem
 				$this.bind('MozMousePixelScroll' + eventClassName, function (e) {
+					console.log(e);
 					if (shouldPrevent) {
 						e.preventDefault();
 					}
@@ -579,26 +581,30 @@
 			var supportsTouch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch);
 
 			var initialize = function () {
-				var ieMatch = navigator.userAgent.toLowerCase().match(/(msie) ([\w.]+)/);
-				if (ieMatch && ieMatch[1] === 'msie') {
-					// must be executed at first, because 'ieSupport' may addClass to the container
-					ieSupport(parseInt(ieMatch[2], 10));
-				}
+				// var ieMatch = navigator.userAgent.toLowerCase().match(/(msie) ([\w.]+)/);
+				// if (ieMatch && ieMatch[1] === 'msie') {
+				// 	// must be executed at first, because 'ieSupport' may addClass to the container
+				// 	ieSupport(parseInt(ieMatch[2], 10));
+				// }
 
 				updateBarSizeAndPosition();
 				bindScrollHandler();
 				bindMouseScrollXHandler();
 				bindMouseScrollYHandler();
 				bindRailClickHandler();
+
 				if (supportsTouch) {
 					bindMobileTouchHandler();
 				}
+
 				if ($this.wheel) {
 					bindMouseWheelHandler();
 				}
+
 				if (settings.useKeyboard) {
 					bindKeyboardHandler();
 				}
+
 				$this.data('fas-scrollbar', $this);
 				$this.data('fas-scrollbar-update', updateBarSizeAndPosition);
 				$this.data('fas-scrollbar-destroy', destroy);
