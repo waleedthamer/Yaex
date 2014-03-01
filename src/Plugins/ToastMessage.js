@@ -34,34 +34,34 @@
 			var toastItemClose;
 			var toastItemImage;
 
-			if (!$('.toast-container').size()) {
-				toastWrapAll = $('<div class="toast-container "></div>').addClass('toast-position-' + localSettings.position).appendTo('body');
+			if (!Yaex.DOM('.toast-container').size()) {
+				toastWrapAll = Yaex.DOM('<div class="toast-container "></div>').addClass('toast-position-' + localSettings.position).appendTo('body');
 			} else {
-				toastWrapAll = $('.toast-container');
+				toastWrapAll = Yaex.DOM('.toast-container');
 			}
 
-			/*toastWrapAll = (!$('.toast-container').size) ? $('<div></div>').
+			/*toastWrapAll = (!Yaex.DOM('.toast-container').size) ? Yaex.DOM('<div></div>').
 				addClass('toast-container').addClass('toast-position-' + 
-				localSettings.position).appendTo('body') : $('.toast-container');*/
+				localSettings.position).appendTo('body') : Yaex.DOM('.toast-container');*/
 
-			toastItemOuter = $('<div class="toast-item-wrapper"></div>');
+			toastItemOuter = Yaex.DOM('<div class="toast-item-wrapper"></div>');
 
-			//toastItemInner = $('<div></div>').hide().addClass('toast-item toast-type-' + localSettings.type).appendTo(toastWrapAll).html($('<p>').append(localSettings.text)).animate(localSettings.inEffect, localSettings.inEffectDuration).wrap(toastItemOuter);
-			//toastItemInner = $('<div class="' + 'toast-item toast-type-' + localSettings.type + '"></div>').hide().appendTo(toastWrapAll).html($('<p>').append(localSettings.text)).animate(localSettings.inEffect, localSettings.inEffectDuration).wrap(toastItemOuter);
-			toastItemInner = $('<div class="' + 'toast-item toast-type-' + localSettings.type + '"></div>').show('slow').appendTo(toastWrapAll).html($('<p>').append(localSettings.text)).animate(localSettings.inEffect, localSettings.inEffectDuration).wrap(toastItemOuter);
+			//toastItemInner = Yaex.DOM('<div></div>').hide().addClass('toast-item toast-type-' + localSettings.type).appendTo(toastWrapAll).html(Yaex.DOM('<p>').append(localSettings.text)).animate(localSettings.inEffect, localSettings.inEffectDuration).wrap(toastItemOuter);
+			//toastItemInner = Yaex.DOM('<div class="' + 'toast-item toast-type-' + localSettings.type + '"></div>').hide().appendTo(toastWrapAll).html(Yaex.DOM('<p>').append(localSettings.text)).animate(localSettings.inEffect, localSettings.inEffectDuration).wrap(toastItemOuter);
+			toastItemInner = Yaex.DOM('<div class="' + 'toast-item toast-type-' + localSettings.type + '"></div>').show('slow').appendTo(toastWrapAll).html(Yaex.DOM('<p>').append(localSettings.text)).animate(localSettings.inEffect, localSettings.inEffectDuration).wrap(toastItemOuter);
 
 			//console.log(toastItemInner);
 
-			//			toastItemClose = $('<div class="toast-item-close"></div>').prependTo(toastItemInner).html(localSettings.closeText).click(function() {
-			//				$().toastMessage('removeToast', toastItemInner, localSettings);
+			//			toastItemClose = Yaex.DOM('<div class="toast-item-close"></div>').prependTo(toastItemInner).html(localSettings.closeText).click(function() {
+			//				Yaex.DOM().toastMessage('removeToast', toastItemInner, localSettings);
 			//			});
 
 
-			toastItemClose = $('<div class="toast-item-close"></div>').prependTo(toastItemInner).html(localSettings.closeText).click(function () {
-				$().toastMessage('removeToast', toastItemInner, localSettings);
+			toastItemClose = Yaex.DOM('<div class="toast-item-close"></div>').prependTo(toastItemInner).html(localSettings.closeText).click(function () {
+				Yaex.DOM().toastMessage('removeToast', toastItemInner, localSettings);
 			});
 
-			//			toastItemImage = $('<div class="toast-item-image"></div>').addClass('toast-item-image-' + localSettings.type).prependTo(toastItemInner);
+			//			toastItemImage = Yaex.DOM('<div class="toast-item-image"></div>').addClass('toast-item-image-' + localSettings.type).prependTo(toastItemInner);
 
 			var iconAw = '';
 
@@ -80,7 +80,7 @@
 				break;
 			}
 
-			toastItemImage = $('<div class="toast-item-image"></div>').html('<i class="fa fa-' + iconAw + '"></i>').prependTo(toastItemInner);
+			toastItemImage = Yaex.DOM('<div class="toast-item-image"></div>').html('<i class="fa fa-' + iconAw + '"></i>').prependTo(toastItemInner);
 
 			if (navigator.userAgent.match(/MSIE 6/i)) {
 				toastWrapAll.css({
@@ -90,7 +90,7 @@
 
 			if (!localSettings.sticky) {
 				setTimeout(function () {
-					$().toastMessage('removeToast', toastItemInner, localSettings);
+					Yaex.DOM().toastMessage('removeToast', toastItemInner, localSettings);
 				}, localSettings.stayTime);
 			}
 
@@ -101,28 +101,28 @@
 				text: message,
 				type: 'notice'
 			};
-			return $().toastMessage('showToast', options);
+			return Yaex.DOM().toastMessage('showToast', options);
 		},
 		showSuccessToast: function (message) {
 			var options = {
 				text: message,
 				type: 'success'
 			};
-			return $().toastMessage('showToast', options);
+			return Yaex.DOM().toastMessage('showToast', options);
 		},
 		showErrorToast: function (message) {
 			var options = {
 				text: message,
 				type: 'error'
 			};
-			return $().toastMessage('showToast', options);
+			return Yaex.DOM().toastMessage('showToast', options);
 		},
 		showWarningToast: function (message) {
 			var options = {
 				text: message,
 				type: 'warning'
 			};
-			return $().toastMessage('showToast', options);
+			return Yaex.DOM().toastMessage('showToast', options);
 		},
 		removeToast: function (obj, options) {
 			//console.log(obj);
@@ -144,15 +144,15 @@
 		}
 	};
 
-	$.fn.toastMessage = function (method) {
+	Yaex.DOM.Function.toastMessage = function (method) {
 		// Method calling logic
 		//console.log(Array.prototype.slice.call(arguments, 1));
 		if (methods[method]) {
 			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-		} else if ($.isObject(method) || !method) {
+		} else if (Yaex.DOM.isObject(method) || !method) {
 			return methods.init.apply(this, arguments);
 		} else {
-			$.error('Method ' + method + ' does not exist on jQuery.toastMessage');
+			Yaex.DOM.error('Method ' + method + ' does not exist on jQuery.toastMessage');
 		}
 	};
 })($);

@@ -3,7 +3,7 @@
 
 	// BUTTON PUBLIC CLASS DEFINITION
 	var Button = function (element, options) {
-		this.$element = $(element);
+		this.$element = Yaex.DOM(element);
 		this.options = Yaex.Utility.simpleExtend({}, Button.DEFAULTS, options);
 	};
 
@@ -53,11 +53,11 @@
 	};
 
 	// BUTTON PLUGIN DEFINITION
-	// var old = $.fn.button
+	// var old = Yaex.DOM.Function.button
 
-	$.fn.button = function (option) {
+	Yaex.DOM.Function.button = function (option) {
 		return this.each(function () {
-			var $this = $(this);
+			var $this = Yaex.DOM(this);
 			var data = $this.data('yaex.button');
 			var options = typeof option == 'object' && option;
 
@@ -68,17 +68,17 @@
 		});
 	};
 
-	$.fn.button.Constructor = Button;
+	Yaex.DOM.Function.button.Constructor = Button;
 
 	// BUTTON NO CONFLICT
-	// $.fn.button.noConflict = function () {
-	// 	$.fn.button = old;
+	// Yaex.DOM.Function.button.noConflict = function () {
+	// 	Yaex.DOM.Function.button = old;
 	// 	return this;
 	// };
 
 	// BUTTON DATA-API
-	$(document).on('click.yaex.button.data-api', '[data-toggle^=button]', function (e) {
-		var $btn = $(e.target);
+	Yaex.DOM(document).on('click.yaex.button.data-api', '[data-toggle^=button]', function (e) {
+		var $btn = Yaex.DOM(e.target);
 		if (!$btn.hasClass('btn')) $btn = $btn.closest('.btn');
 		$btn.button('toggle');
 		e.preventDefault();

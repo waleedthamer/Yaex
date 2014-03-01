@@ -17,7 +17,6 @@
 		return 'tagName' in node ? node : node.parentNode;
 	}
 
-	// if ($.UserAgent.iOS) {
 	if (Yaex.UserAgent.OS.iOS) {
 		var gesture = new Object;
 		var gestureTimeout;

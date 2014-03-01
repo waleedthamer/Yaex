@@ -6,9 +6,9 @@
 		this.init('popover', element, options);
 	};
 
-	if (!$.fn.tooltip) throw new Error('Popover requires Tooltip.js');
+	if (!Yaex.DOM.Function.tooltip) throw new Error('Popover requires Tooltip.js');
 
-	Popover.DEFAULTS = Yaex.Utility.simpleExtend({}, $.fn.tooltip.constructor.DEFAULTS, {
+	Popover.DEFAULTS = Yaex.Utility.simpleExtend({}, Yaex.DOM.Function.tooltip.constructor.DEFAULTS, {
 		placement: 'right',
 		trigger: 'click',
 		content: '',
@@ -16,7 +16,7 @@
 	});
 
 	// NOTE: POPOVER EXTENDS Tooltip.js
-	Popover.prototype = Yaex.Utility.simpleExtend({}, $.fn.tooltip.constructor.prototype);
+	Popover.prototype = Yaex.Utility.simpleExtend({}, Yaex.DOM.Function.tooltip.constructor.prototype);
 
 	Popover.prototype.constructor = Popover;
 
@@ -57,13 +57,13 @@
 	};
 
 	Popover.prototype.tip = function () {
-		if (!this.$tip) this.$tip = $(this.options.template);
+		if (!this.$tip) this.$tip = Yaex.DOM(this.options.template);
 		return this.$tip;
 	};
 
-	$.fn.popover = function (option) {
+	Yaex.DOM.Function.popover = function (option) {
 		return this.each(function () {
-			var $this = $(this);
+			var $this = Yaex.DOM(this);
 			var data = $this.data('yaex.popover');
 			var options = typeof option == 'object' && option;
 
@@ -72,5 +72,5 @@
 		});
 	};
 
-	$.fn.popover.constructor = Popover;
+	Yaex.DOM.Function.popover.constructor = Popover;
 })($);
