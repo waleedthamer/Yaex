@@ -1,15 +1,15 @@
 /**
- * DOM.Event - Cross browser events implementation using Yaex.DOM's API
+ * Events - Events implementation using Yaex's API
  *
  *
- * @depends: Yaex.js | Core, DOM, Selector
+ * @depends: Yaex.js | Core
  * @version 0.10
  * @license Dual licensed under the MIT and GPL licenses.
  */
 
 //---
 
-+ ('Yaex', function (window, document, undefined) {
++ ('Yaex', function () {
 
 	'use strict';
 
@@ -238,7 +238,7 @@
 
 	Yaex.Mixin.Events = _Prototype_;
 
-})(window, document);
+})(Yaex);
 
 //---
 

@@ -9,7 +9,7 @@
 
 //---
 
-+ ('Yaex', function (window, document, undefined) {
++ ('Yaex', function () {
 	// 
 	'use strict';
 
@@ -56,9 +56,9 @@
 		retina = matches && matches.matches;
 	}
 
-	var ua = navigator.userAgent.toLowerCase();
+	// var ua = navigator.userAgent.toLowerCase();
 
-	var phantomjs = ua.indexOf('phantom') !== -1;
+	// var phantomjs = ua.indexOf('phantom') !== -1;
 
 	var msPointer = navigator.msPointerEnabled && navigator.msMaxTouchPoints && !window.PointerEvent;
 
@@ -276,6 +276,6 @@
 	// 	}
 	// });
 	
-})(window, document);
+})(Yaex);
 
 //---

@@ -9,7 +9,7 @@
 
 //---
 
-+ ('Yaex', function (window, document, undefined) {
++ ('Yaex', function () {
 
 	'use strict';
 
@@ -360,7 +360,7 @@
 
 			lastTime = time + timeToCall;
 
-			return window.setTimeout(fn, timeToCall);
+			return window.setTimeout(_function, timeToCall);
 		}
 
 		var requestFunction = window.requestAnimationFrame ||
@@ -402,6 +402,6 @@
 
 	//---
 
-})(window, document);
+})(Yaex);
 
 //---

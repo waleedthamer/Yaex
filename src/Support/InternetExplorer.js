@@ -14,13 +14,13 @@
 	// __proto__ doesn't exist on IE<11, so redefine
 	// the X function to use object extension instead
 	if (!('__proto__' in {})) {
-		Yaex.Extend(Yaex.DOM, {
+		Yaex.Utility.Extend(Yaex.DOM.YaexDOM, {
 			Y: function (dom, selector) {
 				dom = dom || [];
-				Yaex.Extend(dom, Yaex.DOM.Function);
+				Yaex.Utility.Extend(dom, Yaex.DOM.Function);
 				dom.selector = selector || '';
 				dom._Y_ = true;
-				dom.uid = 'YAEX' + Yaex.Now;
+				// dom.uid = 'YAEX' + Yaex.Now;
 				return dom;
 			},
 

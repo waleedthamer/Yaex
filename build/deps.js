@@ -1,65 +1,103 @@
 var deps = {
 	Core: {
 		src: [
-			'Yaex.js',
-			'Core.js', 
-			'Event.js', 
-			'FX.js', 
-			'FX.Methods.js', 
-			'Ajax.js', 
-			'Form.js', 
-			'IE.js'
+			'Core/Core.js',
+			'Core/Global.js',
+			'Core/Utility.js',
+			'Core/Class.js',
+			'Core/Detect.js',
+			'Core/Deferred.js',
+			'Core/Callbacks.js',
+			'Core/Events.js',
+			'Core/ObjectOriented.js',
+			'Core/Logger.js',
+			'Core/Queue.js',
+			'Core/Handler.js',
+			'Core/Data.js'
 		],
 		
-		desc: 'Yaex core library'
+		desc: 'Yaex Core Library.'
+	},
+
+	DOM: {
+		src: [
+			'DOM/DOM.js',
+			'DOM/Selector.js',
+			'DOM/Data.js',
+			'DOM/DOM.Event.js',
+			'DOM/Draggable.js',
+			'DOM/FX.js',
+			'DOM/FX.Methods.js',
+			'DOM/Ajax.js',
+			'DOM/Form.js',
+			'DOM/DOM.Extra.js',
+			'DOM/DOM.Event.Gesture.js',
+			'DOM/DOM.Event.Press.js',
+			'DOM/DOM.Event.Shake.js',
+			'DOM/DOM.Event.Touch.js',
+			'DOM/Stack.js',
+			'DOM/Assets.js',
+
+			'Support/InternetExplorer.js',
+			'Support/IOS3.js',
+			'Support/Cordova.js',
+		],
+		
+		desc: 'Yaex DOM Module.'
 	},
 	
-	All: {
-		src: [
-			'Yaex.js',
-			'Core.js', 
-			'ObjectOriented.js', 
-			'Assets.js', 
-			'Detect.js', 
-			'IE.js', 
-			'Selector.js', 
-			'Data.js', 
-			'Callbacks.js', 
-			'Deferred.js', 
-			'Extra.js', 
-			'Event.js', 
-			'HashChange.js', 
-			// 'MouseWheel.js', 
-			'OnPress.js', 
-			'OnShake.js', 
-			'Ajax.js', 
-			'Router.js', 
-			'FX.js', 
-			'FX.Methods.js', 
-			'Form.js', 
-			'Touch.js', 
-			'Stack.js', 
-			'Logger.js', 
-			'IOS.js'
-		],
+	// All: {
+	// 	src: [
+	// 		'Core/Core.js',
+	// 		'Core/Global.js',
+	// 		'Core/Utility.js',
+	// 		'Core/Class.js',
+	// 		'Core/Detect.js',
+	// 		'Core/Deferred.js',
+	// 		'Core/Callbacks.js',
+	// 		'Core/Events.js',
+	// 		'Core/ObjectOriented.js',
+	// 		'Core/Logger.js',
+	// 		'Core/Queue.js',
+	// 		'Core/Handler.js',
+	// 		'Core/Data.js',
+
+	// 		'DOM/DOM.js',
+	// 		'DOM/Selector.js',
+	// 		'DOM/Data.js',
+	// 		'DOM/DOM.Event.js',
+	// 		'DOM/Draggable.js',
+	// 		'DOM/FX.js',
+	// 		'DOM/FX.Methods.js',
+	// 		'DOM/Ajax.js',
+	// 		'DOM/Form.js',
+	// 		'DOM/DOM.Extra.js',
+	// 		'DOM/DOM.Event.Gesture.js',
+	// 		'DOM/DOM.Event.Press.js',
+	// 		'DOM/DOM.Event.Shake.js',
+	// 		'DOM/DOM.Event.Touch.js',
+	// 		'DOM/Stack.js',
+	// 		'DOM/Assets.js',
+
+	// 		'Support/InternetExplorer.js',
+	// 		'Support/IOS3.js',
+	// 		'Support/Cordova.js',
+	// 	],
 		
-		desc: 'Yaex full library'
-	},
+	// 	desc: 'Yaex Library with DOM.'
+	// },
 
 	Plugins: {
 		src: [
 			'Plugins/Transition.js',
-			// 'Plugins/Sound.js',
-			// 'Plugins/Tab.js',
 			'Plugins/Alert.js',
 			'Plugins/ToastMessage.js',
 			'Plugins/Button.js',
-			// 'Plugins/Dropdown.js',
 			'Plugins/Scroller.js',
 			'Plugins/Tooltip.js',
 			'Plugins/Popover.js',
 			'Plugins/AutoFix.js',
-			// 'Plugins/AudioPlayer.js'
+			'Plugins/HashRouter.js',
 		],
 		
 		desc: 'Yaex Plugins.',

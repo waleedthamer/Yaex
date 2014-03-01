@@ -102,9 +102,9 @@ exports.build = function (callback, compsBase32, buildName) {
 	
 	var newSrc = copy + intro + combineFiles(files) + outro;
 	
-	var pathPart = 'dist/yaex' + (buildName ? '-' + buildName : '');
+	var pathPart = 'dist/yaex' + (buildName ? '_' + buildName : '');
 	
-	var srcPath = pathPart + '.src.js';
+	var srcPath = pathPart + '_src.js';
 
 	var oldSrc = loadSilently(srcPath);
 	
