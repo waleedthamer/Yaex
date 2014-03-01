@@ -37,7 +37,7 @@
 			var trigger = triggers[i];
 
 			if (trigger == 'click') {
-				this.$element.bind('click.' + this.type, this.options.selector, $.Proxy(this.toggle, this));
+				this.$element.bind('click.' + this.type, this.options.selector, $.proxy(this.toggle, this));
 			} else if (trigger !== 'manual') {
 				var eventIn;
 				var eventOut;
@@ -50,13 +50,13 @@
 					eventOut = 'blur';
 				}
 
-				this.$element.on(eventIn + '.' + this.type, this.options.selector, null, $.Proxy(this.enter, this));
-				this.$element.on(eventOut + '.' + this.type, this.options.selector, null, $.Proxy(this.leave, this));
+				this.$element.on(eventIn + '.' + this.type, this.options.selector, null, $.proxy(this.enter, this));
+				this.$element.on(eventOut + '.' + this.type, this.options.selector, null, $.proxy(this.leave, this));
 			}
 		}
 
 		this.options.selector ?
-			(this._options = $.Extend({}, this.options, {
+			(this._options = Yaex.Utility.simpleExtend({}, this.options, {
 				trigger: 'manual',
 				selector: ''
 			})) :
@@ -68,7 +68,7 @@
 	};
 
 	Tooltip.prototype.getOptions = function (options) {
-		options = $.Extend({}, this.getDefaults(), this.$element.data(), options);
+		options = Yaex.Utility.simpleExtend({}, this.getDefaults(), this.$element.data(), options);
 
 		if (options.delay && typeof options.delay == 'number') {
 			options.delay = {
@@ -289,7 +289,7 @@
 
 	Tooltip.prototype.getPosition = function () {
 		var el = this.$element[0];
-		return $.Extend({}, (typeof el.getBoundingClientRect == 'function') ? el.getBoundingClientRect() : {
+		return Yaex.Utility.simpleExtend({}, (typeof el.getBoundingClientRect == 'function') ? el.getBoundingClientRect() : {
 			width: el.offsetWidth,
 			height: el.offsetHeight
 		}, this.$element.offset());
@@ -374,4 +374,4 @@
 	};
 
 	$.fn.tooltip.constructor = Tooltip;
-})(Yaex)
+})($);

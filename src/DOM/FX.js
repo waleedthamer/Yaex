@@ -1,13 +1,16 @@
 /**
- * FX - Animation methods for Yaex
+ * FX - Cross browser animations implementation using Yaex.DOM's API [DOM]
  *
  *
- * @depends: Yaex.js | Core, Selector, Data, Event, Extra
+ * @depends: Yaex.js | Core, DOM, Selector
  * @version 0.10
  * @license Dual licensed under the MIT and GPL licenses.
  */
 
-+ ('Yaex', function ($, undefined) {
+//---
+
++ ('Yaex', function () {
+
 	'use strict';
 
 	var prefix = '';
@@ -43,7 +46,7 @@
 		return eventPrefix ? eventPrefix + name : name.toLowerCase();
 	}
 
-	$.each(vendors, function (vendor, event) {
+	Yaex.Each(vendors, function (vendor, event) {
 		if (testEl.style[vendor + 'TransitionProperty'] !== undefined) {
 			prefix = '-' + vendor.toLowerCase() + '-';
 			eventPrefix = event;
@@ -74,19 +77,19 @@
 		animationEnd: normalizeEvent('AnimationEnd'),
 	};
 
-	$.fn.animate = function (properties, duration, ease, callback, delay) {
-		if ($.isFunction(duration)) {
+	Yaex.DOM.Function.animate = function (properties, duration, ease, callback, delay) {
+		if (Yaex.Global.isFunction(duration)) {
 			callback = duration;
 			ease = undefined;
 			duration = undefined;
 		}
 
-		if ($.isFunction(ease)) {
+		if (Yaex.Global.isFunction(ease)) {
 			callback = ease;
 			ease = undefined;
 		}
 
-		if ($.isPlainObject(duration)) {
+		if (Yaex.Global.isPlainObject(duration)) {
 			ease = duration.easing;
 			callback = duration.complete;
 			delay = duration.delay;
@@ -105,7 +108,7 @@
 		return this.anim(properties, duration, ease, callback, delay);
 	};
 
-	$.fn.anim = function (properties, duration, ease, callback, delay) {
+	Yaex.DOM.Function.anim = function (properties, duration, ease, callback, delay) {
 		var key, cssValues = {}, cssProperties, transforms = '',
 			that = this,
 			wrappedCallback, endEvent = $.fx.transitionEnd,
@@ -144,12 +147,14 @@
 		wrappedCallback = function (event) {
 			if (typeof event !== 'undefined') {
 				if (event.target !== event.currentTarget) return; // makes sure the event didn't bubble from 'below'
-				$(event.target).unbind(endEvent, wrappedCallback);
+				Yaex.DOM(event.target).unbind(endEvent, wrappedCallback);
 			} else
-				$(this).unbind(endEvent, wrappedCallback); // triggered by setTimeout
+				Yaex.DOM(this).unbind(endEvent, wrappedCallback); // triggered by setTimeout
 
 			fired = true;
-			$(this).css(cssReset);
+
+			Yaex.DOM(this).css(cssReset);
+			
 			callback && callback.call(this);
 		}
 		if (duration > 0) {
@@ -177,4 +182,8 @@
 	};
 
 	testEl = null;
-})(Yaex)
+
+})(Yaex.DOM);
+
+//---
+

@@ -7,7 +7,7 @@
  * @license Dual licensed under the MIT and GPL licenses.
  */
 
-+ ('Yaex', function ($) {
++ ('Yaex', function (window, document, undefined) {
 	'use strict';
 
 	// The default settings for the plugin
@@ -36,12 +36,12 @@
 
 		return this.each(function () {
 			// Use the default settings
-			var settings = $.Extend(true, {}, defaultSettings),
+			var settings = Yaex.Utility.simpleExtend(true, {}, defaultSettings),
 				$this = $(this);
 
 			if (typeof SuppliedSettings === 'object') {
 				// But over-ride any supplied
-				$.Extend(true, settings, SuppliedSettings);
+				Yaex.Utility.simpleExtend(true, settings, SuppliedSettings);
 			} else {
 				// If no settings were supplied, then the first param must be the option
 				option = SuppliedSettings;

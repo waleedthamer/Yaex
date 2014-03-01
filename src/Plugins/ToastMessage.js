@@ -18,14 +18,14 @@
 	var methods = {
 		init: function (options) {
 			if (options) {
-				$.Extend(settings, options);
+				Yaex.Utility.simpleExtend(settings, options);
 			}
 
 		},
 		showToast: function (options) {
 			var localSettings = {};
 
-			$.Extend(localSettings, settings, options);
+			Yaex.Utility.simpleExtend(localSettings, settings, options);
 
 			// declare variables
 			var toastWrapAll;
@@ -155,4 +155,4 @@
 			$.error('Method ' + method + ' does not exist on jQuery.toastMessage');
 		}
 	};
-})(Yaex)
+})($);

@@ -1,19 +1,32 @@
-+(function (window, undefined) {
+/**
+ * InternetExplorer - Microsoft's Internet Explorer fix/support using Yaex's API [Support]
+ *
+ *
+ * @depends: Yaex.js | Core
+ * @version 0.10
+ * @license Dual licensed under the MIT and GPL licenses.
+ */
+
+//---
+
++ ('Yaex', function (window, undefined) {
+
 	// __proto__ doesn't exist on IE<11, so redefine
 	// the X function to use object extension instead
 	if (!('__proto__' in {})) {
-		$.Extend({
+		Yaex.Extend(Yaex.DOM, {
 			Y: function (dom, selector) {
 				dom = dom || [];
-				$.Extend(dom, $.Func);
+				Yaex.Extend(dom, Yaex.DOM.Function);
 				dom.selector = selector || '';
 				dom._Y_ = true;
+				dom.uid = 'YAEX' + Yaex.Now;
 				return dom;
 			},
 
 			// This is a kludge but works
 			isY: function (object) {
-				return $.Type(object) === 'array' && '_Y_' in object;
+				return Yaex.Global.Type(object) === 'array' && '_Y_' in object;
 			}
 		});
 	}
@@ -32,4 +45,8 @@
 			}
 		};
 	}
-})(this)
+
+})(this);
+
+//---
+

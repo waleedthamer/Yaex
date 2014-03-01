@@ -1,4 +1,4 @@
-+ ('Yaex', function ($) {
++ ('Yaex', function (window, document, undefined) {
 	'use strict';
 
 	// Plugin information
@@ -22,7 +22,7 @@
 		this.Element = element;
 
 		// Merge the options given by the user with the defaults
-		this.Options = $.Extend({}, PluginOptions, options);
+		this.Options = Yaex.Utility.simpleExtend({}, PluginOptions, options);
 
 		this.$el = $(el);
 		this.$el.data(name, this);
@@ -39,7 +39,7 @@
 	};
 
 	$.fn.Plugin = function (defaults) {
-		Settings = $.Extend({}, $.fn.Plugin.PluginOptions, defaults);
+		Settings = Yaex.Utility.simpleExtend({}, $.fn.Plugin.PluginOptions, defaults);
 
 		return this.each(function () {
 			var element = this;
@@ -49,4 +49,4 @@
 		});
 	};
 
-})(Yaex)
+})($);
