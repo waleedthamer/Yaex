@@ -5,17 +5,17 @@
 		onlyInContainer: true
 	};
 
-	$.fn.AutoFix = function (options) {
+	Yaex.DOM.Function.AutoFix = function (options) {
 		var settings = Yaex.Utility.simpleExtend({}, defaults, options),
-			el = $(this),
+			el = Yaex.DOM(this),
 			curpos = el.position(),
 			offset = settings.customOffset,
 			pos = el.offset();
 
 		el.addClass('YaexAutoFix');
 
-		$.fn.ManualFix = function () {
-			var el = $(this),
+		Yaex.DOM.Function.ManualFix = function () {
+			var el = Yaex.DOM(this),
 				pos = el.offset();
 
 			if (el.hasClass('_Fixed')) {
@@ -32,7 +32,7 @@
 
 		fixAll = function (el, settings, curpos, pos) {
 			if (settings.customOffset == false) offset = el.parent().offset().top;
-			if ($(document).scrollTop() > offset && $(document).scrollTop() <= (el.parent().height() + (offset - $(window).height()))) {
+			if (Yaex.DOM(document).scrollTop() > offset && Yaex.DOM(document).scrollTop() <= (el.parent().height() + (offset - Yaex.DOM(window).height()))) {
 				el.removeClass('_Bottom').addClass('_Fixed').css({
 					top: 0,
 					left: pos.left,
@@ -40,9 +40,9 @@
 					bottom: 'auto'
 				});
 			} else {
-				if ($(document).scrollTop() > offset) {
+				if (Yaex.DOM(document).scrollTop() > offset) {
 					if (settings.onlyInContainer == true) {
-						if ($(document).scrollTop() > (el.parent().height() - $(window).height())) {
+						if (Yaex.DOM(document).scrollTop() > (el.parent().height() - Yaex.DOM(window).height())) {
 							el.addClass('_Bottom _Fixed').removeAttr('style').css({
 								left: curpos.left
 							});
@@ -58,7 +58,7 @@
 		};
 
 		if (settings.manual == false) {
-			$(window).scroll(function () {
+			Yaex.DOM(window).scroll(function () {
 				fixAll(el, settings, curpos, pos);
 			});
 		}

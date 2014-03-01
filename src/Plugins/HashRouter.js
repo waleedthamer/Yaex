@@ -37,7 +37,7 @@
 		},
 		add: function (path, name, fn) {
 			if (path && name) {
-				if ($.isFunction(name)) {
+				if (Yaex.Global.isFunction(name)) {
 					fn = name;
 					name = null;
 				} // END if
