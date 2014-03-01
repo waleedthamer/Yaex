@@ -217,13 +217,13 @@
 	};
 
 	// These may be used throughout the Yaex core codebase
-	Yaex.DOM.dataUser = $.data_user = new Data();
-	Yaex.DOM.dataPrivative = $.data_priv = new Data();
+	Yaex.DOM.dataUser = Yaex.DOM.data_user = new Data();
+	Yaex.DOM.dataPrivative = Yaex.DOM.data_priv = new Data();
 
 	Yaex.Extend(Yaex.DOM, {
 		acceptData: Data.accepts,
 		hasData: function (elem) {
-			return Yaex.DOM.dataUser.hasData(elem) || $.dataPrivative.hasData(elem);
+			return Yaex.DOM.dataUser.hasData(elem) || Yaex.DOM.dataPrivative.hasData(elem);
 		},
 		data: function (elem, name, data) {
 			return Yaex.DOM.dataUser.access(elem, name, data);
@@ -391,7 +391,7 @@
 				}
 			}
 
-			return dataAttr.call($(node), name);
+			return dataAttr.call(Yaex.DOM(node), name);
 		}
 	}
 

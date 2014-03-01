@@ -555,7 +555,7 @@
 
 	//---
 
-	$.proxy = $.Proxy = function (callback, context) {
+	Yaex.DOM.proxy = Yaex.DOM.Proxy = function (callback, context) {
 		if (Yaex.Global.isFunction(callback)) {
 			var proxyFn = function () {
 				return callback.apply(context, arguments);

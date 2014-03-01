@@ -28,7 +28,7 @@
 	Tooltip.prototype.init = function (type, element, options) {
 		this.enabled = true;
 		this.type = type;
-		this.$element = $(element);
+		this.$element = Yaex.DOM(element);
 		this.options = this.getOptions(options);
 
 		var triggers = this.options.trigger.split(' ');
@@ -37,7 +37,7 @@
 			var trigger = triggers[i];
 
 			if (trigger == 'click') {
-				this.$element.bind('click.' + this.type, this.options.selector, $.proxy(this.toggle, this));
+				this.$element.bind('click.' + this.type, this.options.selector, Yaex.DOM.proxy(this.toggle, this));
 			} else if (trigger !== 'manual') {
 				var eventIn;
 				var eventOut;
@@ -50,8 +50,8 @@
 					eventOut = 'blur';
 				}
 
-				this.$element.on(eventIn + '.' + this.type, this.options.selector, null, $.proxy(this.enter, this));
-				this.$element.on(eventOut + '.' + this.type, this.options.selector, null, $.proxy(this.leave, this));
+				this.$element.on(eventIn + '.' + this.type, this.options.selector, null, Yaex.DOM.proxy(this.enter, this));
+				this.$element.on(eventOut + '.' + this.type, this.options.selector, null, Yaex.DOM.proxy(this.leave, this));
 			}
 		}
 
@@ -84,7 +84,7 @@
 		var options = {};
 		var defaults = this.getDefaults();
 
-		this._options && $.Each(this._options, function (key, value) {
+		this._options && Yaex.DOM.Each(this._options, function (key, value) {
 			if (defaults[key] != value) options[key] = value;
 		});
 
@@ -93,7 +93,7 @@
 
 	Tooltip.prototype.enter = function (obj) {
 		var self = obj instanceof this.constructor ?
-			obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('yaex.' + this.type);
+			obj : Yaex.DOM(obj.currentTarget)[this.type](this.getDelegateOptions()).data('yaex.' + this.type);
 			
 		clearTimeout(self.timeout);
 
@@ -108,7 +108,7 @@
 
 	Tooltip.prototype.leave = function (obj) {
 		var self = obj instanceof this.constructor ?
-			obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('yaex.' + this.type);
+			obj : Yaex.DOM(obj.currentTarget)[this.type](this.getDelegateOptions()).data('yaex.' + this.type);
 
 		clearTimeout(self.timeout);
 
@@ -122,7 +122,7 @@
 	};
 
 	Tooltip.prototype.show = function () {
-		var e = $.Event('show.yaex.' + this.type);
+		var e = Yaex.DOM.Event('show.yaex.' + this.type);
 
 		if (this.hasContent() && this.enabled) {
 			this.$element.trigger(e);
@@ -251,7 +251,7 @@
 	Tooltip.prototype.hide = function () {
 		var that = this;
 		var $tip = this.tip();
-		var e = $.Event('hide.yaex.' + this.type);
+		var e = Yaex.DOM.Event('hide.yaex.' + this.type);
 
 			function complete() {
 				if (that.hoverState != 'in') {
@@ -265,8 +265,8 @@
 
 		$tip.removeClass('in');
 
-		$.Support.transition && this.$tip.hasClass('fade') ?
-			$tip.one($.Support.transition.end, complete)
+		Yaex.DOM.Support.transition && this.$tip.hasClass('fade') ?
+			$tip.one(Yaex.DOM.Support.transition.end, complete)
 				.emulateTransitionEnd(350) :
 				complete();
 
@@ -326,7 +326,7 @@
 	};
 
 	Tooltip.prototype.tip = function () {
-		return this.$tip = this.$tip || $(this.options.template);
+		return this.$tip = this.$tip || Yaex.DOM(this.options.template);
 	};
 
 	Tooltip.prototype.arrow = function () {
@@ -354,7 +354,7 @@
 	};
 
 	Tooltip.prototype.toggle = function (e) {
-		var self = e ? $(e.currentTarget)[this.type](this.getDelegateOptions()).data('yaex.' + this.type) : this
+		var self = e ? Yaex.DOM(e.currentTarget)[this.type](this.getDelegateOptions()).data('yaex.' + this.type) : this
 		self.tip().hasClass('in') ? self.leave(self) : self.enter(self);
 	};
 
@@ -362,9 +362,9 @@
 		this.hide().$element.off('.' + this.type).removeData('yaex.' + this.type);
 	};
 
-	$.fn.tooltip = function (option) {
+	Yaex.DOM.Function.tooltip = function (option) {
 		return this.each(function () {
-			var $this = $(this);
+			var $this = Yaex.DOM(this);
 			var data = $this.data('yaex.tooltip');
 			var options = typeof option == 'object' && option;
 
@@ -373,5 +373,5 @@
 		});
 	};
 
-	$.fn.tooltip.constructor = Tooltip;
+	Yaex.DOM.Function.tooltip.constructor = Tooltip;
 })($);

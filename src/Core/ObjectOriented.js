@@ -65,14 +65,14 @@ if (typeof (Yaex) !== 'object' || !! !window.Yaex) {
 	 * createClass, Class builder for OOP
 	 * implemented `new` operator checker : throw error message when not use `new`.
 	 *
-	 * @usage $.ObjectOriented.create('className', classMembers);
+	 * @usage Yaex.ObjectOriented.create('className', classMembers);
 	 * @param className{string} required, Named oo-class.
 	 * @param classMembers{object} required,
 	 */
 
 	/**
 	 * inherit class, overloaded createClass.
-	 * @usage $.ObjectOriented.create(className, baseClass, classMembers);
+	 * @usage Yaex.ObjectOriented.create(className, baseClass, classMembers);
 	 * @param className{string} required, Named oo-subclass.
 	 * @param baseClass{function} required, superclass created with createClass method.
 	 * @param classMembers{string} required, oo-subclass members.

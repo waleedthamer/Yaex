@@ -4,11 +4,11 @@
 	// ALERT CLASS DEFINITION
 	var dismiss = '[data-dismiss="alert"]';
 	var Alert = function (el) {
-		$(el).on('click', dismiss, this.close);
+		Yaex.DOM(el).on('click', dismiss, this.close);
 	};
 
 	Alert.prototype.close = function (e) {
-		var $this = $(this);
+		var $this = Yaex.DOM(this);
 		var selector = $this.attr('data-target');
 
 		if (!selector) {
@@ -17,7 +17,7 @@
 			selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '');
 		}
 
-		var $parent = $(selector);
+		var $parent = Yaex.DOM(selector);
 
 		if (e) e.preventDefault();
 
@@ -25,7 +25,7 @@
 			$parent = $this.hasClass('alert') ? $this : $this.parent();
 		}
 
-		$parent.trigger(e = $.Event('close.yaex.alert'));
+		$parent.trigger(e = Yaex.DOM.Event('close.yaex.alert'));
 
 		if (e.isDefaultPrevented()) return;
 
@@ -35,19 +35,19 @@
 			$parent.trigger('closed.yaex.alert').remove();
 		}
 
-		$.Support.transition && $parent.hasClass('fade') ?
+		Yaex.DOM.Support.transition && $parent.hasClass('fade') ?
 			$parent
-			.one($.Support.transition.end, removeElement)
+			.one(Yaex.DOM.Support.transition.end, removeElement)
 			.emulateTransitionEnd(150) :
 			removeElement();
 	};
 
 	// ALERT PLUGIN DEFINITION
-	// var old = $.fn.alert;
+	// var old = Yaex.DOM.Function.alert;
 
-	$.fn.alert = function (option) {
+	Yaex.DOM.Function.alert = function (option) {
 		return this.each(function () {
-			var $this = $(this);
+			var $this = Yaex.DOM(this);
 			var data = $this.data('yaex.alert');
 
 			if (!data) $this.data('yaex.alert', (data = new Alert(this)));
@@ -55,14 +55,14 @@
 		});
 	};
 
-	$.fn.alert.Constructor = Alert;
+	Yaex.DOM.Function.alert.Constructor = Alert;
 
 	// ALERT NO CONFLICT
-	// $.fn.alert.noConflict = function () {
-	// 	$.fn.alert = old;
+	// Yaex.DOM.Function.alert.noConflict = function () {
+	// 	Yaex.DOM.Function.alert = old;
 	// 	return this;
 	// };
 
 	// ALERT DATA-API
-	$(document).on('click.yaex.alert.data-api', dismiss, Alert.prototype.close);
+	Yaex.DOM(document).on('click.yaex.alert.data-api', dismiss, Alert.prototype.close);
 })($);

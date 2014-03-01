@@ -29,7 +29,7 @@
 
 		if (scale) {
 			props.scale = scale;
-			el.css($.fx.cssPrefix + 'transform-origin', '0 0');
+			el.css(Yaex.DOM.fx.cssPrefix + 'transform-origin', '0 0');
 		}
 		return el.animate(props, speed, null, callback);
 	}

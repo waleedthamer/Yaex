@@ -116,10 +116,10 @@
 
 	/**
 	 * Public API
-	 * $.Storage.Set('name', 'value')
-	 * $.Storage.Set({'name1':'value1', 'name2':'value2', etc})
-	 * $.Storage.Get('name')
-	 * $.Storage.Remove('name')
+	 * Yaex.DOM.Storage.Set('name', 'value')
+	 * Yaex.DOM.Storage.Set({'name1':'value1', 'name2':'value2', etc})
+	 * Yaex.DOM.Storage.Get('name')
+	 * Yaex.DOM.Storage.Remove('name')
 	 */
 	Yaex.Extend(Yaex.DOM, {
 		Storage: {
@@ -393,7 +393,7 @@
 		// Based off of the plugin by Clint Helfers, with permission.
 		// http://blindsignals.com/index.php/2009/07/jquery-delay/
 		delay: function (time, type) {
-			time = $.fx ? $.fx.speeds[time] || time : time;
+			time = Yaex.DOM.fx ? Yaex.DOM.fx.speeds[time] || time : time;
 			type = type || 'fx';
 
 			return this.queue(type, function (next, hooks) {

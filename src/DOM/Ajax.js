@@ -277,7 +277,7 @@
 				deferred.promise(xhr);
 			}
 
-			// $(script).on('load error', function(e, errorType) {
+			// Yaex.DOM(script).on('load error', function(e, errorType) {
 			Yaex.DOM(script).on('load error', function (e, errorType) {
 				clearTimeout(abortTimeout);
 

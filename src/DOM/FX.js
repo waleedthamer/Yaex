@@ -65,7 +65,7 @@
 		cssReset[animationDelay = prefix + 'animation-delay'] =
 		cssReset[animationTiming = prefix + 'animation-timing-function'] = '';
 
-	$.fx = {
+	Yaex.DOM.fx = {
 		off: (eventPrefix === undefined && testEl.style.transitionProperty === undefined),
 		speeds: {
 			_default: 400,
@@ -98,7 +98,7 @@
 
 		if (duration) {
 			duration = (typeof duration == 'number' ? duration :
-				($.fx.speeds[duration] || $.fx.speeds._default)) / 1000;
+				(Yaex.DOM.fx.speeds[duration] || Yaex.DOM.fx.speeds._default)) / 1000;
 		}
 
 		if (delay) {
@@ -111,15 +111,15 @@
 	Yaex.DOM.Function.anim = function (properties, duration, ease, callback, delay) {
 		var key, cssValues = {}, cssProperties, transforms = '',
 			that = this,
-			wrappedCallback, endEvent = $.fx.transitionEnd,
+			wrappedCallback, endEvent = Yaex.DOM.fx.transitionEnd,
 			fired = false;
 
 		if (duration === undefined) {
-			duration = $.fx.speeds._default / 1000;
+			duration = Yaex.DOM.fx.speeds._default / 1000;
 		}
 
 		if (delay === undefined) delay = 0;
-		if ($.fx.off) duration = 0;
+		if (Yaex.DOM.fx.off) duration = 0;
 
 		if (typeof properties === 'string') {
 			// keyframe animation
@@ -127,7 +127,7 @@
 			cssValues[animationDuration] = duration + 's'
 			cssValues[animationDelay] = delay + 's'
 			cssValues[animationTiming] = (ease || 'linear')
-			endEvent = $.fx.animationEnd
+			endEvent = Yaex.DOM.fx.animationEnd
 		} else {
 			cssProperties = []
 			// CSS transitions

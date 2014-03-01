@@ -32,12 +32,12 @@
 		};
 	}());
 
-	$.fn.Scrollbar = function (SuppliedSettings, option) {
+	Yaex.DOM.Function.Scrollbar = function (SuppliedSettings, option) {
 
 		return this.each(function () {
 			// Use the default settings
 			var settings = Yaex.Utility.simpleExtend(true, {}, defaultSettings),
-				$this = $(this);
+				$this = Yaex.DOM(this);
 
 			if (typeof SuppliedSettings === 'object') {
 				// But over-ride any supplied
@@ -72,10 +72,10 @@
 			// Set class to the container
 			$this.addClass('fas-container');
 
-			var $scrollbarXRail = $("<div class='fas-scrollbar-x-rail'></div>").appendTo($this),
-				$scrollbarYRail = $("<div class='fas-scrollbar-y-rail'></div>").appendTo($this),
-				$scrollbarX = $("<div class='fas-scrollbar-x'></div>").appendTo($scrollbarXRail),
-				$scrollbarY = $("<div class='fas-scrollbar-y'></div>").appendTo($scrollbarYRail),
+			var $scrollbarXRail = Yaex.DOM("<div class='fas-scrollbar-x-rail'></div>").appendTo($this),
+				$scrollbarYRail = Yaex.DOM("<div class='fas-scrollbar-y-rail'></div>").appendTo($this),
+				$scrollbarX = Yaex.DOM("<div class='fas-scrollbar-x'></div>").appendTo($scrollbarXRail),
+				$scrollbarY = Yaex.DOM("<div class='fas-scrollbar-y'></div>").appendTo($scrollbarYRail),
 				scrollbarXActive,
 				scrollbarYActive,
 				containerWidth,
@@ -208,7 +208,7 @@
 					e.preventDefault();
 				});
 
-				$(document).bind('mousemove' + eventClassName, function (e) {
+				Yaex.DOM(document).bind('mousemove' + eventClassName, function (e) {
 					if ($scrollbarXRail.hasClass('in-scrolling')) {
 						updateContentScrollLeft(currentLeft, e.pageX - currentPageX);
 						e.stopPropagation();
@@ -216,7 +216,7 @@
 					}
 				});
 
-				$(document).bind('mouseup' + eventClassName, function (e) {
+				Yaex.DOM(document).bind('mouseup' + eventClassName, function (e) {
 					if ($scrollbarXRail.hasClass('in-scrolling')) {
 						$scrollbarXRail.removeClass('in-scrolling');
 					}
@@ -238,7 +238,7 @@
 					e.preventDefault();
 				});
 
-				$(document).bind('mousemove' + eventClassName, function (e) {
+				Yaex.DOM(document).bind('mousemove' + eventClassName, function (e) {
 					if ($scrollbarYRail.hasClass('in-scrolling')) {
 						updateContentScrollTop(currentTop, e.pageY - currentPageY);
 						e.stopPropagation();
@@ -246,7 +246,7 @@
 					}
 				});
 
-				$(document).bind('mouseup' + eventClassName, function (e) {
+				Yaex.DOM(document).bind('mouseup' + eventClassName, function (e) {
 					if ($scrollbarYRail.hasClass('in-scrolling')) {
 						$scrollbarYRail.removeClass('in-scrolling');
 					}
@@ -287,7 +287,7 @@
 				$this.bind('wheel' + eventClassName, function (e, deprecatedDelta, deprecatedDeltaX, deprecatedDeltaY) {
 					var deltaX = e.deltaX ? e.deltaX / 10 : deprecatedDeltaX,
 						deltaY = e.deltaY ? e.deltaY / 10 : deprecatedDeltaY,
-						WheelSpeed = ($.Browser.Firefox ? 60 : settings.wheelSpeed);
+						WheelSpeed = (Yaex.DOM.Browser.Firefox ? 60 : settings.wheelSpeed);
 
 					if (!settings.useBothWheelAxes) {
 						// deltaX will only be used for horizontal scrolling and deltaY will
@@ -340,7 +340,7 @@
 				});
 
 				var shouldPrevent = false;
-				$(document).bind('keydown' + eventClassName, function (e) {
+				Yaex.DOM(document).bind('keydown' + eventClassName, function (e) {
 					if (!hovered) {
 						return;
 					}
@@ -442,10 +442,10 @@
 					breakingProcess = null,
 					inGlobalTouch = false;
 
-				$(window).bind("touchstart" + eventClassName, function (e) {
+				Yaex.DOM(window).bind("touchstart" + eventClassName, function (e) {
 					inGlobalTouch = true;
 				});
-				$(window).bind("touchend" + eventClassName, function (e) {
+				Yaex.DOM(window).bind("touchend" + eventClassName, function (e) {
 					inGlobalTouch = false;
 				});
 
@@ -513,8 +513,8 @@
 
 			var destroy = function () {
 				$this.unbind(eventClassName);
-				$(window).unbind(eventClassName);
-				$(document).unbind(eventClassName);
+				Yaex.DOM(window).unbind(eventClassName);
+				Yaex.DOM(document).unbind(eventClassName);
 				$this.data('fas-scrollbar', null);
 				$this.data('fas-scrollbar-update', null);
 				$this.data('fas-scrollbar-destroy', null);
@@ -543,10 +543,10 @@
 
 				var bindHoverHandlers = function () {
 					var mouseenter = function () {
-						$(this).addClass('hover');
+						Yaex.DOM(this).addClass('hover');
 					};
 					var mouseleave = function () {
-						$(this).removeClass('hover');
+						Yaex.DOM(this).removeClass('hover');
 					};
 					$this.bind('mouseenter' + eventClassName, mouseenter).bind('mouseleave' + eventClassName, mouseleave);
 					$scrollbarXRail.bind('mouseenter' + eventClassName, mouseenter).bind('mouseleave' + eventClassName, mouseleave);
