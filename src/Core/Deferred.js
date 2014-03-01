@@ -9,7 +9,7 @@
 
 //---
 
-+ ('Yaex', function (window, document, undefined) {
++ ('Yaex', function () {
 
 	'use strict';
 
@@ -152,6 +152,6 @@
 
 	//---
 
-})(window, document);
+})(Yaex);
 
 //---
