@@ -1,17 +1,20 @@
 /**
- * OnShake - Cross browser onshake event implementation using Yaex's API for special events
+ * DOM.Shake - Cross browser shake event implementation using Yaex.DOM's API
  *
  *
- * @depends: Yaex.js | Core, Event, Extra
+ * @depends: Yaex.js | Core, DOM, Selector, Event
  * @version 0.10
  * @license Dual licensed under the MIT and GPL licenses.
  */
 
-+ ('Yaex', function ($) {
+//---
+
++ ('Yaex', function () {
+
 	'use strict';
 
 	if (typeof window.DeviceMotionEvent !== 'undefined') {
-		$.onshake = function (callb, sens) {
+		Yaex.DOM.Function.onshake = function (callb, sens) {
 			// Shake sensitivity (a lower number is more sensitive)
 			var sensitivity = sens || 20,
 				checkDelay = 150,
@@ -53,7 +56,14 @@
 			checkDeviceMotion();
 		};
 	} else {
-		$.onshake = function () {};
+		Yaex.DOM.Function.onshake = function () {
+			//...
+		};
 	}
-	
-})(Yaex)
+
+	//---
+
+})(Yaex.DOM);
+
+//---
+

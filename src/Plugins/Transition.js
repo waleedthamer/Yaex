@@ -1,5 +1,7 @@
-+(function ($) {
++ ('Yaex', function () {
+
 	'use strict';
+
 	// CSS TRANSITION SUPPORT (http://www.modernizr.com/)
 	function transitionEnd() {
 		var el = document.createElement('yaex');
@@ -21,16 +23,18 @@
 	}
 
 	// http://blog.alexmaccaw.com/css-transitions
-	$.fn.emulateTransitionEnd = function (duration) {
+	Yaex.DOM.Function.emulateTransitionEnd = function (duration) {
 		var called = false;
-		var $el = this;
+		var el = this;
 
-		$(this).one($.Support.transition.end, function () {
-			called = true
+		Yaex.DOM(this).one(Yaex.DOM.Support.transition.end, function () {
+			called = true;
 		});
 
 		var callback = function () {
-			if (!called) $($el).trigger($.Support.transition.end)
+			if (!called) {
+				Yaex.DOM(el).trigger(Yaex.DOM.Support.transition.end);
+			}
 		};
 
 		setTimeout(callback, duration);
@@ -38,7 +42,13 @@
 		return this;
 	};
 
-	$(function () {
-		$.Support.transition = transitionEnd();
-	})
-})(Yaex)
+	Yaex.DOM(function () {
+		Yaex.DOM.Support.transition = transitionEnd();
+	});
+
+	//---
+	
+})(Yaex.DOM);
+
+//---
+

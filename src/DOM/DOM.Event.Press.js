@@ -1,16 +1,19 @@
 /**
- * OnPress - Cross browser onpress event implementation using Yaex's API for special events
+ * DOM.Press - Cross browser press event implementation using Yaex.DOM's API
  *
  *
- * @depends: Yaex.js | Core, Event, Extra
+ * @depends: Yaex.js | Core, DOM, Selector, Event
  * @version 0.10
  * @license Dual licensed under the MIT and GPL licenses.
  */
 
-+ ('Yaex', function ($) {
+//---
+
++ ('Yaex', function () {
+
 	'use strict';
 
-	$.UserAgent.Touch = !(typeof window.ontouchstart === 'undefined');
+	// Yaex.UserAgent.Features.Touch = !(typeof window.ontouchstart === 'undefined');
 
 	var ghostsLifeTime = 1000;
 
@@ -18,7 +21,7 @@
 		var callback,
 			selector;
 
-		if (typeof args[0] === 'function') {
+		if (Yaex.Global.isFunction(args[0])) {
 			callback = args[0];
 		} else {
 			selector = args[0];
@@ -28,11 +31,11 @@
 		return [selector, callback];
 	};
 
-	if ($.UserAgent.Touch) {
+	if (Yaex.UserAgent.Features.Touch) {
 		var ghosts = [],
 			callbacks = [],
 			handlers = [],
-			$doc = $(document);
+			doc = Yaex.DOM(document);
 
 		var removeGhosts = function () {
 			ghosts.splice(0, 2);
@@ -47,9 +50,9 @@
 			}
 		};
 
-		$doc.on('click', handleGhosts);
+		doc.on('click', handleGhosts);
 
-		$.fn.onpress = function () {
+		Yaex.DOM.Function.onpress = function () {
 			// Passing empty selectors, empty arguments list or a document node cause bugs on android/iOS
 			// Just to be on the safe side allowing only element and document fragment nodes to be used
 			if (!arguments.length || !this.length || !this[0].nodeType || (this[0].nodeType !== 1 && this[0].nodeType !== 11)) {
@@ -68,7 +71,7 @@
 				touches[0] = coords.pageX;
 				touches[1] = coords.pageY;
 
-				$doc.on('touchmove.onpress', handleTouchMove);
+				doc.on('touchmove.onpress', handleTouchMove);
 
 				args[0] ? that.on('touchend.onpress', args[0], handleTouchEnd) : that.on('touchend.onpress', handleTouchEnd);
 			};
@@ -91,7 +94,7 @@
 			};
 
 			var resetHandlers = function () {
-				$doc.off('touchmove.onpress', handleTouchMove);
+				doc.off('touchmove.onpress', handleTouchMove);
 				args[0] ? that.off('touchend.onpress', args[0], handleTouchEnd) : that.off('touchend.onpress', handleTouchEnd);
 			};
 
@@ -110,7 +113,7 @@
 			}
 		};
 
-		$.fn.offpress = function () {
+		Yaex.DOM.Function.offpress = function () {
 			var args = normalizeArgs(arguments),
 				i;
 
@@ -145,7 +148,7 @@
 			}
 		}
 	} else {
-		$.fn.onpress = function () {
+		Yaex.DOM.Function.onpress = function () {
 			var args = normalizeArgs(arguments);
 			if (args[0]) {
 				this.on('click.onpress', args[0], args[1]);
@@ -155,9 +158,14 @@
 				this.on('press.onpress', args[1]);
 			}
 		};
-		$.fn.offpress = function () {
+		Yaex.DOM.Function.offpress = function () {
 			var args = normalizeArgs(arguments);
 			args[0] ? this.off('.onpress', args[0], args[1]) : this.off('.onpress', args[1]);
 		};
 	}
-})(Yaex)
+
+	//---
+
+})(Yaex.DOM);
+
+//---

@@ -1,20 +1,23 @@
 /**
- * Extra - Extra functionalities for Yaex
+ * DOM.Extra - Cross browser DOM utilities using Yaex's API [DOM]
  *
  *
- * @depends: Yaex.js | Core, Selector, Data, Event, Extra
+ * @depends: Yaex.js | Core, DOM, Selector, Event
  * @version 0.10
  * @license Dual licensed under the MIT and GPL licenses.
  */
 
-+ ('Yaex', function ($) {
+//---
+
++ ('Yaex', function () {
+
 	'use strict';
 
 	// Map object to object
-	$.MapObjectToObject = function (obj, callback) {
+	Yaex.DOM.mapObjectToObject = function (obj, callback) {
 		var result = {};
 
-		$.each(obj, function (key, value) {
+		Yaex.Each(obj, function (key, value) {
 			result[key] = callback.call(obj, key, value);
 		});
 
@@ -31,11 +34,11 @@
 	function WriteToLocalStorage(name, value) {
 		var key;
 
-		if ($.isString(name) && $.isString(value)) {
+		if (Yaex.Global.isString(name) && Yaex.Global.isString(value)) {
 			localStorage[name] = value;
 			return true;
-		// } else if ($.isObject(name) && typeof value === 'undefined') {
-		} else if ($.isObject(name) && $.isUndefined(value)) {
+		// } else if (Yaex.Global.isObject(name) && typeof value === 'undefined') {
+		} else if (Yaex.Global.isObject(name) && Yaex.Global.isUndefined(value)) {
 			for (key in name) {
 				if (name.hasOwnProperty(key)) {
 					localStorage[key] = name[key];
@@ -66,11 +69,11 @@
 
 		expire = '; expires=' + date.toGMTString();
 
-		if ($.isString(name) && $.isString(value)) {
+		if (Yaex.Global.isString(name) && Yaex.Global.isString(value)) {
 			document.cookie = name + '=' + value + expire + '; path=/';
 			return true;
 		// } else if (typeof n === 'object' && typeof v === 'undefined') {
-		} else if ($.isObject(name) && $.isUndefined(value)) {
+		} else if (Yaex.Global.isObject(name) && Yaex.Global.isUndefined(value)) {
 			for (key in name) {
 				if (name.hasOwnProperty(key)) {
 					document.cookie = key + '=' + name[key] + expire + '; path=/';
@@ -118,7 +121,7 @@
 	 * $.Storage.Get('name')
 	 * $.Storage.Remove('name')
 	 */
-	$.Extend({
+	Yaex.Extend(Yaex.DOM, {
 		Storage: {
 			Set: isLocalStorage ? WriteToLocalStorage : WriteCookie,
 			Get: isLocalStorage ? ReadFromLocalStorage : ReadCookie,
@@ -129,26 +132,26 @@
 	//---
 
 	// Yaex Timers
-	$.fn.extend({
+	Yaex.DOM.Function.extend({
 		everyTime: function (interval, label, fn, times, belay) {
 			//console.log(this);
 			return this.each(function () {
-				$.timer.add(this, interval, label, fn, times, belay);
+				Yaex.DOM.timer.add(this, interval, label, fn, times, belay);
 			});
 		},
 		oneTime: function (interval, label, fn) {
 			return this.each(function () {
-				$.timer.add(this, interval, label, fn, 1);
+				Yaex.DOM.timer.add(this, interval, label, fn, 1);
 			});
 		},
 		stopTime: function (label, fn) {
 			return this.each(function () {
-				$.timer.remove(this, label, fn);
+				Yaex.DOM.timer.remove(this, label, fn);
 			});
 		}
 	});
 
-	$.Extend({
+	Yaex.Extend(Yaex.DOM, {
 		timer: {
 			GUID: 1,
 			global: {},
@@ -167,7 +170,7 @@
 				if (value === undefined || value === null) {
 					return null;
 				}
-				var result = this.regex.exec($.trim(value.toString()));
+				var result = this.regex.exec(Yaex.Global.Trim(value.toString()));
 				if (result[2]) {
 					var num = parseInt(result[1], 10);
 					var mult = this.powers[result[2]] || 1;
@@ -179,7 +182,7 @@
 			add: function (element, interval, label, fn, times, belay) {
 				var counter = 0;
 
-				if ($.isFunction(label)) {
+				if (Yaex.Global.isFunction(label)) {
 					if (!times) {
 						times = fn;
 					}
@@ -187,7 +190,7 @@
 					label = interval;
 				}
 
-				interval = $.timer.timeParse(interval);
+				interval = Yaex.DOM.timer.timeParse(interval);
 
 				if (typeof interval !== 'number' ||
 					isNaN(interval) ||
@@ -217,7 +220,7 @@
 					handler.inProgress = true;
 					if ((++counter > times && times !== 0) ||
 						fn.call(element, counter) === false) {
-						$.timer.remove(element, label, fn);
+						Yaex.DOM.timer.remove(element, label, fn);
 					}
 					handler.inProgress = false;
 				};
@@ -287,18 +290,18 @@
 
 	//---
 
-	$.Extend({
+	Yaex.Extend(Yaex.DOM, {
 		queue: function (elem, type, data) {
 			var queue;
 
 			if (elem) {
 				type = (type || 'fx') + 'queue';
-				queue = $.data_priv.get(elem, type);
+				queue = Yaex.DOM.dataPrivative.get(elem, type);
 
 				// Speed up dequeue by getting out quickly if this is just a lookup
 				if (data) {
-					if (!queue || $.isArray(data)) {
-						queue = $.data_priv.access(elem, type, $.makeArray(data));
+					if (!queue || Yaex.Global.isArray(data)) {
+						queue = Yaex.DOM.dataPrivative.access(elem, type, Yaex.DOM.makeArray(data));
 					} else {
 						queue.push(data);
 					}
@@ -310,12 +313,12 @@
 		dequeue: function (elem, type) {
 			type = type || 'fx';
 
-			var queue = $.queue(elem, type),
+			var queue = Yaex.DOM.queue(elem, type),
 				startLength = queue.length,
 				fn = queue.shift(),
-				hooks = $._queueHooks(elem, type),
+				hooks = Yaex.DOM._queueHooks(elem, type),
 				next = function () {
-					$.dequeue(elem, type);
+					Yaex.DOM.dequeue(elem, type);
 				};
 
 			// If the fx queue is dequeued, always remove the progress sentinel
@@ -345,9 +348,9 @@
 		// not intended for public consumption - generates a queueHooks object, or returns the current one
 		_queueHooks: function (elem, type) {
 			var key = type + 'queueHooks';
-			return $.data_priv.get(elem, key) || $.data_priv.access(elem, key, {
-				empty: $.Callbacks('once memory').add(function () {
-					$.data_priv.remove(elem, [type + 'queue', key]);
+			return Yaex.DOM.dataPrivative.get(elem, key) || Yaex.DOM.dataPrivative.access(elem, key, {
+				empty: Yaex.Callbacks('once memory').add(function () {
+					Yaex.DOM.dataPrivative.remove(elem, [type + 'queue', key]);
 				})
 			});
 		}
@@ -355,7 +358,7 @@
 
 	//---
 
-	$.fn.extend({
+	Yaex.DOM.Function.extend({
 		queue: function (type, data) {
 			var setter = 2;
 
@@ -366,25 +369,25 @@
 			}
 
 			if (arguments.length < setter) {
-				return $.queue(this[0], type);
+				return Yaex.DOM.queue(this[0], type);
 			}
 
 			return data === undefined ?
 				this :
 				this.each(function () {
-					var queue = $.queue(this, type, data);
+					var queue = Yaex.DOM.queue(this, type, data);
 
 					// ensure a hooks for this queue
-					$._queueHooks(this, type);
+					Yaex.DOM._queueHooks(this, type);
 
 					if (type === 'fx' && queue[0] !== 'inprogress') {
-						$.dequeue(this, type);
+						Yaex.DOM.dequeue(this, type);
 					}
 				});
 		},
 		dequeue: function (type) {
 			return this.each(function () {
-				$.dequeue(this, type);
+				Yaex.DOM.dequeue(this, type);
 			});
 		},
 		// Based off of the plugin by Clint Helfers, with permission.
@@ -408,7 +411,7 @@
 		promise: function (type, obj) {
 			var tmp,
 				count = 1,
-				defer = $.Deferred(),
+				defer = Yaex.Global.Deferred(),
 				elements = this,
 				i = this.length,
 				resolve = function () {
@@ -424,7 +427,7 @@
 			type = type || 'fx';
 
 			while (i--) {
-				tmp = data_priv.get(elements[i], type + 'queueHooks');
+				tmp = dataPrivative.get(elements[i], type + 'queueHooks');
 				if (tmp && tmp.empty) {
 					count++;
 					tmp.empty.add(resolve);
@@ -437,8 +440,8 @@
 
 	//---
 
-	$.fn.appear = function (fn, options) {
-		var settings = $.Extend({
+	Yaex.DOM.Function.appear = function (fn, options) {
+		var settings = Yaex.Extend({
 			//arbitrary data to pass to fn
 			data: undefined,
 
@@ -447,7 +450,7 @@
 		}, options);
 
 		return this.each(function () {
-			var t = $(this);
+			var t = Yaex.DOM(this);
 
 			//whether the element is currently visible
 			t.appeared = false;
@@ -459,7 +462,7 @@
 				return;
 			}
 
-			var w = $(window);
+			var w = Yaex.DOM(window);
 
 			//fires the appear event when appropriate
 			var check = function () {
@@ -504,8 +507,8 @@
 
 					//remove the check
 					w.unbind('scroll', check);
-					var i = $.inArray(check, $.fn.appear.checks);
-					if (i >= 0) $.fn.appear.checks.splice(i, 1);
+					var i = Yaex.Global.inArray(check, Yaex.DOM.Function.appear.checks);
+					if (i >= 0) Yaex.DOM.Function.appear.checks.splice(i, 1);
 				}
 
 				//trigger the original fn
@@ -520,7 +523,7 @@
 			w.scroll(check);
 
 			//check whenever the dom changes
-			$.fn.appear.checks.push(check);
+			Yaex.DOM.Function.appear.checks.push(check);
 
 			//check now
 			(check)();
@@ -528,37 +531,37 @@
 	};
 
 	// Keep a queue of appearance checks
-	$.Extend($.fn.appear, {
+	Yaex.Extend(Yaex.DOM.Function.appear, {
 
 		checks: [],
 		timeout: null,
 
 		//process the queue
 		checkAll: function () {
-			var length = $.fn.appear.checks.length;
+			var length = Yaex.DOM.Function.appear.checks.length;
 			if (length > 0)
-				while (length--)($.fn.appear.checks[length])();
+				while (length--)(Yaex.DOM.Function.appear.checks[length])();
 		},
 
 		//check the queue asynchronously
 		run: function () {
-			if ($.fn.appear.timeout) clearTimeout($.fn.appear.timeout);
-			$.fn.appear.timeout = setTimeout($.fn.appear.checkAll, 20);
+			if (Yaex.DOM.Function.appear.timeout) clearTimeout(Yaex.DOM.Function.appear.timeout);
+			Yaex.DOM.Function.appear.timeout = setTimeout(Yaex.DOM.Function.appear.checkAll, 20);
 		}
 	});
 
 	// Run checks when these methods are called
-	$.each(['append', 'prepend', 'after', 'before',
+	Yaex.Each(['append', 'prepend', 'after', 'before',
 		'attr', 'removeAttr', 'addClass', 'removeClass',
 		'toggleClass', 'remove', 'css', 'show', 'hide'
 	], function (i, n) {
-		var old = $.fn[n];
+		var old = Yaex.DOM.Function[n];
 
 		if (old) {
-			$.fn[n] = function () {
+			Yaex.DOM.Function[n] = function () {
 				var r = old.apply(this, arguments);
 
-				$.fn.appear.run();
+				Yaex.DOM.Function.appear.run();
 
 				return r;
 			}
@@ -567,7 +570,7 @@
 
 	//---
 
-	$.fn.swipe = function (options) {
+	Yaex.DOM.Function.swipe = function (options) {
 		if (!this) return false;
 		var touchable = 'ontouchstart' in window,
 			START = 'start',
@@ -582,7 +585,7 @@
 
 		return this.each(function () {
 			var self = this,
-				$self = $(this),
+				$self = Yaex.DOM(this),
 				start = {
 					x: 0,
 					y: 0
@@ -678,20 +681,20 @@
 
 	//---
 
-	$.fn.visible = function (visibility) {
+	Yaex.DOM.Function.visible = function (visibility) {
 		// return this.each(function (index, item) {
 		return this.each(function () {
-			var yEl = $(this);
+			var yEl = Yaex.DOM(this);
 			yEl.css('visibility', visibility ? '' : 'hidden');
 		});
 	};
 
 	//---
 
-	$.fn.resizeText = function (value) {
+	Yaex.DOM.Function.resizeText = function (value) {
 		// return this.each(function (index, item) {
 		return this.each(function () {
-			var yEl = $(this);
+			var yEl = Yaex.DOM(this);
 
 			var current = yEl.html();
 
@@ -713,8 +716,6 @@
 
 			var fontSuffix = fontStr.split(fontNumStr).join('');
 
-			// console.log(['w', w, 'h', h, 'fontStr', fontStr, 'fontNumStr', fontNumStr, 'fontSize', fontSize, 'fontSuffix', fontSuffix].join(':'));
-
 			yEl.html(value);
 
 			do {
@@ -726,144 +727,6 @@
 
 	//---
 
-	/** 
-	 * If no touch events are available map touch events to corresponding mouse events.
-	 **/
-	// try {
-	// 	document.createEvent('TouchEvent');
-	// } catch (e) {
-	// 	var _fakeCallbacks = {}, // Store the faked callbacks so that they can be unbound
-	// 		eventmap = {
-	// 			'touchstart': 'mousedown',
-	// 			'touchend': 'mouseup',
-	// 			'touchmove': 'mousemove'
-	// 		};
+})(Yaex.DOM);
 
-	// 	function touch2mouse(type, callback, context) {
-	// 		if ((typeof type) == 'object') {
-	// 			// Assume we have been called with an event object.
-	// 			// Do not map the event.
-	// 			// TODO: Should this still try and map the event.
-	// 			return [type]
-	// 		}
-
-	// 		// remove the extra part after the .
-	// 		var p = type.match(/([^.]*)(\..*|$)/),
-	// 			// orig = p[0],
-	// 			type = p[1],
-	// 			extra = p[2],
-	// 			mappedevent = eventmap[type];
-
-	// 		result = [(mappedevent || type) + extra]
-	// 		if (arguments.length > 1) {
-	// 			if (mappedevent) {
-	// 				callback = fakeTouches(type, callback, context);
-	// 			}
-
-	// 			result.push(callback);
-	// 		}
-
-
-	// 		return result;
-	// 	}
-
-	// 	function fakeTouches(type, callback, context) {
-	// 		// wrap the callback with a function that adds a fake 
-	// 		// touches property to the event.
-
-	// 		return _fakeCallbacks[callback] = function (event) {
-	// 			if (event.button) {
-	// 				return false;
-	// 			}
-	// 			event.touches = [{
-	// 				length: 1, // 1 mouse (finger)
-	// 				clientX: event.clientX,
-	// 				clientY: event.clienty,
-	// 				pageX: event.pageX,
-	// 				pageY: event.pageY,
-	// 				screenX: event.screenX,
-	// 				screenY: event.screenY,
-	// 				target: event.target
-	// 			}]
-
-	// 			event.touchtype = type;
-
-	// 			return callback.apply(context, [event]);
-	// 		}
-	// 	}
-
-	// 	var _bind = $.fn.bind;
-
-	// 	$.fn.bind = function (event, callback) {
-	// 		return _bind.apply(this, touch2mouse(event, callback, this));
-	// 	};
-
-	// 	var _unbind = $.fn.unbind;
-
-	// 	$.fn.unbind = function (event, callback) {
-	// 		if (!event) {
-	// 			_unbind.apply(this);
-	// 			return;
-	// 		}
-	// 		var result = _unbind.apply(this, touch2mouse(event).concat([_fakeCallbacks[callback] || callback]));
-	// 		delete(_fakeCallbacks[callback]);
-	// 		return result;
-	// 	};
-
-	// 	var _one = $.fn.one;
-
-	// 	$.fn.one = function (event, callback) {
-	// 		return _one.apply(this, touch2mouse(event, callback, this));
-	// 	};
-
-	// 	var _delegate = $.fn.delegate;
-
-	// 	$.fn.delegate = function (selector, event, callback) {
-	// 		return _delegate.apply(this, [selector].concat(touch2mouse(event, callback, this)));
-	// 	};
-
-	// 	var _undelegate = $.fn.undelegate;
-
-	// 	$.fn.undelegate = function (selector, event, callback) {
-	// 		var result = _undelegate.apply(this, [selector].concat(touch2mouse(event), [_fakeCallbacks[callback] || callback]));
-	// 		delete(_fakeCallbacks[callback]);
-	// 		return result;
-	// 	};
-
-	// 	var _live = $.fn.live;
-
-	// 	$.fn.live = function (event, callback) {
-	// 		return _live.apply(this, touch2mouse(event, callback, this));
-	// 	};
-
-	// 	var _die = $.fn.die;
-
-	// 	$.fn.die = function (event, callback) {
-	// 		var result = _die.apply(this, touch2mouse(event).concat([_fakeCallbacks[callback] || callback]));
-	// 		delete(_fakeCallbacks[callback]);
-	// 		return result;
-	// 	};
-
-	// 	var _trigger = $.fn.trigger;
-
-	// 	$.fn.trigger = function (event, data) {
-	// 		return _trigger.apply(this, touch2mouse(event).concat([data]));
-	// 	};
-
-	// 	var _triggerHandler = $.fn.triggerHandler;
-
-	// 	$.fn.triggerHandler = function (event, data) {
-	// 		return _triggerHandler.apply(this, touch2mouse(event).concat([data]));
-	// 	};
-	// };
-
-	//---
-
-	window.cordova = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-
-	if (window.cordova === false) {
-		$(function () {
-			$(document).trigger('deviceready');
-		});
-	}
-})(Yaex)
+//---

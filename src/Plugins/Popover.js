@@ -8,7 +8,7 @@
 
 	if (!$.fn.tooltip) throw new Error('Popover requires Tooltip.js');
 
-	Popover.DEFAULTS = $.Extend({}, $.fn.tooltip.constructor.DEFAULTS, {
+	Popover.DEFAULTS = Yaex.Utility.simpleExtend({}, $.fn.tooltip.constructor.DEFAULTS, {
 		placement: 'right',
 		trigger: 'click',
 		content: '',
@@ -16,7 +16,7 @@
 	});
 
 	// NOTE: POPOVER EXTENDS Tooltip.js
-	Popover.prototype = $.Extend({}, $.fn.tooltip.constructor.prototype);
+	Popover.prototype = Yaex.Utility.simpleExtend({}, $.fn.tooltip.constructor.prototype);
 
 	Popover.prototype.constructor = Popover;
 
@@ -73,4 +73,4 @@
 	};
 
 	$.fn.popover.constructor = Popover;
-})(Yaex)
+})($);

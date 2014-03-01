@@ -1,10 +1,10 @@
-+(function ($) {
++ (function ($) {
 	'use strict';
 
 	// BUTTON PUBLIC CLASS DEFINITION
 	var Button = function (element, options) {
 		this.$element = $(element);
-		this.options = $.Extend({}, Button.DEFAULTS, options);
+		this.options = Yaex.Utility.simpleExtend({}, Button.DEFAULTS, options);
 	};
 
 	Button.DEFAULTS = {
@@ -83,4 +83,4 @@
 		$btn.button('toggle');
 		e.preventDefault();
 	});
-})(Yaex)
+})($);

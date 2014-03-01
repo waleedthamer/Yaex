@@ -1,6 +1,19 @@
-+(function ($) {
+/**
+ * DOM.Touch - Cross browser touch event implementation using Yaex.DOM's API
+ *
+ *
+ * @depends: Yaex.js | Core, DOM, Selector, Event
+ * @version 0.10
+ * @license Dual licensed under the MIT and GPL licenses.
+ */
+
+//---
+
++ ('Yaex', function () {
+
 	'use strict';
-	var touch = {};
+
+	var touch = new Object;
 	var touchTimeout;
 	var tapTimeout;
 	var swipeTimeout;
@@ -17,7 +30,7 @@
 
 		if (touch.last) {
 			touch.el.trigger('longTap');
-			touch = {};
+			touch = new Object;
 		}
 	}
 
@@ -35,7 +48,7 @@
 		if (swipeTimeout) clearTimeout(swipeTimeout);
 		if (longTapTimeout) clearTimeout(longTapTimeout);
 		touchTimeout = tapTimeout = swipeTimeout = longTapTimeout = null;
-		touch = {};
+		touch = new Object;
 	}
 
 	function isPrimaryTouch(event) {
@@ -46,7 +59,7 @@
 		return (e.type == 'pointer' + type || e.type.toLowerCase() == 'mspointer' + type);
 	}
 
-	$(document).ready(function () {
+	Yaex.DOM(document).ready(function () {
 		var now;
 		var delta;
 		var deltaX = 0;
@@ -59,7 +72,7 @@
 			gesture.target = document.body;
 		}
 
-		$(document)
+		Yaex.DOM(document)
 			.bind('MSGestureEnd', function (e) {
 				var swipeDirectionFromVelocity = e.velocityX > 1 ? 'Right' : e.velocityX < -1 ? 'Left' : e.velocityY > 1 ? 'Down' : e.velocityY < -1 ? 'Up' : null;
 				if (swipeDirectionFromVelocity) {
@@ -69,16 +82,19 @@
 			})
 			.on('touchstart MSPointerDown pointerdown', function (e) {
 				if ((_isPointerType = isPointerEventType(e, 'down')) && !isPrimaryTouch(e)) return;
+				
 				firstTouch = _isPointerType ? e : e.touches[0];
+
 				if (e.touches && e.touches.length === 1 && touch.x2) {
 					// Clear out touch movement data if we have it sticking around
 					// This can occur if touchcancel doesn't fire due to preventDefault, etc.
 					touch.x2 = undefined;
 					touch.y2 = undefined;
 				}
+
 				now = Date.now();
 				delta = now - (touch.last || now);
-				touch.el = $('tagName' in firstTouch.target ? firstTouch.target : firstTouch.target.parentNode);
+				touch.el = Yaex.DOM('tagName' in firstTouch.target ? firstTouch.target : firstTouch.target.parentNode);
 				touchTimeout && clearTimeout(touchTimeout);
 				touch.x1 = firstTouch.pageX;
 				touch.y1 = firstTouch.pageY;
@@ -109,7 +125,7 @@
 					swipeTimeout = setTimeout(function () {
 						touch.el.trigger('swipe');
 						touch.el.trigger('swipe' + (swipeDirection(touch.x1, touch.x2, touch.y1, touch.y2)));
-						touch = {};
+						touch = new Object;
 					}, 0);
 
 				// normal tap
@@ -123,28 +139,35 @@
 
 							// trigger universal 'tap' with the option to cancelTouch()
 							// (cancelTouch cancels processing of single vs double taps for faster 'tap' response)
-							var event = $.Event('tap');
+							var event = Yaex.DOM.Event('tap');
 							event.cancelTouch = cancelAll;
 							touch.el.trigger(event);
 
 							// trigger double tap immediately
 							if (touch.isDoubleTap) {
-								if (touch.el) touch.el.trigger('doubleTap');
-								touch = {};
+								if (touch.el) {
+									touch.el.trigger('doubleTap');
+								}
+
+								touch = new Object;
 							}
 
 							// trigger single tap after 250ms of inactivity
 							else {
 								touchTimeout = setTimeout(function () {
 									touchTimeout = null;
-									if (touch.el) touch.el.trigger('singleTap');
-									touch = {};
+									if (touch.el) {
+										touch.el.trigger('singleTap');
+									}
+
+									touch = new Object;
 								}, 250);
 							}
 						}, 0);
 					} else {
-						touch = {};
+						touch = new Object;
 					}
+
 				deltaX = deltaY = 0;
 
 			})
@@ -155,12 +178,18 @@
 
 		// scrolling the window indicates intention of the user
 		// to scroll, not tap or swipe, so cancel all ongoing events
-		$(window).on('scroll', cancelAll);
+		Yaex.DOM(window).on('scroll', cancelAll);
 	});
 
-	['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown', 'doubleTap', 'tap', 'singleTap', 'longTap'].forEach(function (eventName) {
-		$.fn[eventName] = function (callback) {
-			return this.bind(eventName, callback);
+	('swipe swipeLeft swipeRight swipeUp swipeDown doubleTap tap singleTap longTap').split(' ').forEach(function (event) {
+		Yaex.DOM.Function[event] = function (callback) {
+			return this.bind(event, callback);
 		};
 	});
-})(Yaex)
+
+	//---
+
+})(Yaex.DOM);
+
+//---
+

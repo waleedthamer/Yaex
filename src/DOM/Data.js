@@ -1,18 +1,22 @@
 /**
- * Data - Data implementation using Yaex's API
+ * DOM.Data - Cross browser data implementation using Yaex.DOM's API [DOM]
  *
  *
- * @depends: Yaex.js | Core, Selector
+ * @depends: Yaex.js | Core, DOM, Selector
  * @version 0.10
  * @license Dual licensed under the MIT and GPL licenses.
  */
 
-+ ('Yaex', function ($) {
+//---
+
++ ('Yaex', function (window, document, undefined) {
+
 	'use strict';
+
 	var data = {};
-	var dataAttr = $.fn.data;
-	var camelize = $.camelCase;
-	var exp = $.Expando + new Date();
+	var dataAttr = Yaex.DOM.Function.data;
+	var Camelise = Yaex.Global.Camelise;
+	var exp = Yaex.DOM.Expando;
 
 	/**
 	 Implementation Summary
@@ -38,8 +42,7 @@
 			}
 		});
 
-		// this.Expando = 'Yaex' + ($.Version + $.BuildNumber + $.RandomNumber(10000, 70000)).replace(/\D/g, '');
-		this.Expando = $.Expando + Math.random();
+		this.Expando = Yaex.DOM.Expando;
 	}
 
 	Data.UID = 1;
@@ -83,7 +86,7 @@
 					// Fallback to a less secure definition
 				} catch (e) {
 					descriptor[this.Expando] = unlock;
-					$.Extend(owner, descriptor);
+					Yaex.Extend(owner, descriptor);
 				}
 			}
 
@@ -109,8 +112,8 @@
 				// Handle: [ owner, { properties } ] args
 			} else {
 				// Fresh assignments by object are shallow copied
-				if ($.isEmptyObject(cache)) {
-					$.Extend(this.cache[unlock], data);
+				if (Yaex.Global.isEmptyObject(cache)) {
+					Yaex.Extend(this.cache[unlock], data);
 					// Otherwise, copy the properties one-by-one to the cache object
 				} else {
 					for (prop in data) {
@@ -149,7 +152,7 @@
 				stored = this.get(owner, key);
 
 				return stored !== undefined ?
-					stored : this.get(owner, $.camelCase(key));
+					stored : this.get(owner, Camelise(key));
 			}
 
 			// [*]When the key is not a string, or both a key and value
@@ -174,16 +177,16 @@
 
 			} else {
 				// Support array or space separated string of keys
-				if ($.isArray(key)) {
+				if (Yaex.Global.isArray(key)) {
 					// If "name" is an array of keys...
 					// When data is initially created, via ("key", "val") signature,
 					// keys will be converted to camelCase.
 					// Since there is no way to tell _how_ a key was added, remove
 					// both plain key and camelCase key. #12786
 					// This will only penalize the array argument path.
-					name = key.concat(key.map($.camelCase));
+					name = key.concat(key.map(Camelise));
 				} else {
-					camel = $.camelCase(key);
+					camel = Camelise(key);
 					// Try the string as a key before any manipulation
 					if (key in cache) {
 						name = [key, camel];
@@ -191,7 +194,7 @@
 						// If a key with the spaces exists, use it.
 						// Otherwise, create an array by matching non-whitespace
 						name = camel;
-						name = name in cache ? [name] : (name.match($.core_rnotwhite) || []);
+						name = name in cache ? [name] : (name.match(/\S+/g) || []);
 					}
 				}
 
@@ -202,7 +205,7 @@
 			}
 		},
 		hasData: function (owner) {
-			return !$.isEmptyObject(
+			return !Yaex.Global.isEmptyObject(
 				this.cache[owner[this.Expando]] || {}
 			);
 		},
@@ -214,32 +217,31 @@
 	};
 
 	// These may be used throughout the Yaex core codebase
-	$.data_user = new Data();
-	$.data_priv = new Data();
+	Yaex.DOM.dataUser = $.data_user = new Data();
+	Yaex.DOM.dataPrivative = $.data_priv = new Data();
 
-	$.Extend({
+	Yaex.Extend(Yaex.DOM, {
 		acceptData: Data.accepts,
 		hasData: function (elem) {
-			return $.data_user.hasData(elem) || $.data_priv.hasData(elem);
+			return Yaex.DOM.dataUser.hasData(elem) || $.dataPrivative.hasData(elem);
 		},
 		data: function (elem, name, data) {
-			return $.data_user.access(elem, name, data);
+			return Yaex.DOM.dataUser.access(elem, name, data);
 		},
 		removeData: function (elem, name) {
-			$.data_user.remove(elem, name);
+			Yaex.DOM.dataUser.remove(elem, name);
 		},
 		// TODO: Now that all calls to _data and _removeData have been replaced
-		// with direct calls to data_priv methods, these can be deprecated.
+		// with direct calls to dataPrivative methods, these can be deprecated.
 		_data: function (elem, name, data) {
-			return $.data_priv.access(elem, name, data);
+			return Yaex.DOM.dataPrivative.access(elem, name, data);
 		},
 		_removeData: function (elem, name) {
-			$.data_priv.remove(elem, name);
+			Yaex.DOM.dataPrivative.remove(elem, name);
 		}
 	});
 
-
-	$.fn.extend({
+	Yaex.DOM.Function.extend({
 		data: function (key, value) {
 			var attrs, name,
 				elem = this[0],
@@ -249,19 +251,19 @@
 			// Gets all values
 			if (key === undefined) {
 				if (this.length) {
-					data = $.data_user.get(elem);
+					data = Yaex.DOM.dataUser.get(elem);
 
-					if (elem.nodeType === 1 && !$.data_priv.get(elem, "hasDataAttrs")) {
+					if (elem.nodeType === 1 && !Yaex.DOM.dataPrivative.get(elem, "hasDataAttrs")) {
 						attrs = elem.attributes;
 						for (; i < attrs.length; i++) {
 							name = attrs[i].name;
 
 							if (name.indexOf("data-") === 0) {
-								name = $.camelCase(name.slice(5));
+								name = Camelise(name.slice(5));
 								dataAttr(elem, name, data[name]);
 							}
 						}
-						$.data_priv.set(elem, "hasDataAttrs", true);
+						Yaex.DOM.dataPrivative.set(elem, "hasDataAttrs", true);
 					}
 				}
 
@@ -271,13 +273,13 @@
 			// Sets multiple values
 			if (typeof key === "object") {
 				return this.each(function () {
-					$.data_user.set(this, key);
+					Yaex.DOM.dataUser.set(this, key);
 				});
 			}
 
-			return $.access(this, function (value) {
+			return Yaex.DOM.Access(this, function (value) {
 				var data,
-					camelKey = $.camelCase(key);
+					camelKey = Camelise(key);
 
 				// The calling Yaex object (element matches) is not empty
 				// (and therefore has an element appears at this[ 0 ]) and the
@@ -287,14 +289,14 @@
 				if (elem && value === undefined) {
 					// Attempt to get data from the cache
 					// with the key as-is
-					data = $.data_user.get(elem, key);
+					data = Yaex.DOM.dataUser.get(elem, key);
 					if (data !== undefined) {
 						return data;
 					}
 
 					// Attempt to get data from the cache
-					// with the key camelized
-					data = $.data_user.get(elem, camelKey);
+					// with the key Camelised
+					data = Yaex.DOM.dataUser.get(elem, camelKey);
 					if (data !== undefined) {
 						return data;
 					}
@@ -314,25 +316,25 @@
 				this.each(function () {
 					// First, attempt to store a copy or reference of any
 					// data that might've been store with a camelCased key.
-					var data = $.data_user.get(this, camelKey);
+					var data = Yaex.DOM.dataUser.get(this, camelKey);
 
 					// For HTML5 data-* attribute interop, we have to
 					// store property names with dashes in a camelCase form.
 					// This might not apply to all properties...*
-					$.data_user.set(this, camelKey, value);
+					Yaex.DOM.dataUser.set(this, camelKey, value);
 
 					// *... In the case of properties that might _actually_
 					// have dashes, we need to also store a copy of that
 					// unchanged property.
 					if (key.indexOf("-") !== -1 && data !== undefined) {
-						$.data_user.set(this, key, value);
+						Yaex.DOM.dataUser.set(this, key, value);
 					}
 				});
 			}, null, value, arguments.length > 1, null, true);
 		},
 		removeData: function (key) {
 			return this.each(function () {
-				$.data_user.remove(this, key);
+				Yaex.DOM.dataUser.remove(this, key);
 			});
 		}
 	});
@@ -358,7 +360,7 @@
 				} catch (e) {}
 
 				// Make sure we set the data so it isn't changed later
-				$.data_user.set(elem, key, data);
+				Yaex.DOM.dataUser.set(elem, key, data);
 			} else {
 				data = undefined;
 			}
@@ -368,7 +370,7 @@
 
 	// Get value from node:
 	// 1. first try key as given,
-	// 2. then try camelized key,
+	// 2. then try Camelised key,
 	// 3. fall back to reading "data-*" attribute.
 
 	function getData(node, name) {
@@ -382,7 +384,7 @@
 					return store[name];
 				}
 
-				var camelName = $.camelCase(name);
+				var camelName = Camelise(name);
 
 				if (camelName in store) {
 					return store[camelName];
@@ -393,14 +395,14 @@
 		}
 	}
 
-	// Store value under camelized key on node
+	// Store value under Camelised key on node
 
 	function setData(node, name, value) {
-		var id = node[exp] || (node[exp] = ++$.UUID);
+		var id = node[exp] || (node[exp] = ++Yaex.DOM.UUID);
 		var store = data[id] || (data[id] = attributeData(node));
 
 		if (name !== undefined) {
-			store[camelize(name)] = value;
+			store[Camelise(name)] = value;
 		}
 
 		return store;
@@ -410,22 +412,22 @@
 	function attributeData(node) {
 		var store = {};
 
-		$.each(node.attributes || $.EmptyArray, function (i, attr) {
+		Yaex.Each(node.attributes || Yaex.DOM.EmptyArray, function (i, attr) {
 			if (attr.name.indexOf('data-') == 0) {
-				store[camelize(attr.name.replace('data-', ''))] =
-					$.DeserializeValue(attr.value);
+				store[Camelise(attr.name.replace('data-', ''))] =
+					Yaex.Global.deserialiseValue(attr.value);
 			}
 		});
 
 		return store;
 	}
 
-	$.fn.data = function (name, value) {
+	Yaex.DOM.Function.data = function (name, value) {
 		return value === undefined ?
 		// set multiple values via object
-		$.isPlainObject(name) ?
+		Yaex.Global.isPlainObject(name) ?
 			this.each(function (i, node) {
-				$.each(name, function (key, value) {
+				Yaex.Each(name, function (key, value) {
 					setData(node, key, value);
 				});
 			}) :
@@ -437,7 +439,7 @@
 		});
 	};
 
-	$.fn.removeData = function (names) {
+	Yaex.DOM.Function.removeData = function (names) {
 		if (typeof names == 'string') {
 			names = names.split(/\s+/);
 		}
@@ -445,20 +447,24 @@
 			var id = this[exp];
 			var store = id && data[id];
 			if (store)
-				$.each(names || store, function (key) {
-					delete store[names ? camelize(this) : key];
+				Yaex.Each(names || store, function (key) {
+					delete store[names ? Camelise(this) : key];
 				});
 		});
 	};
 
 	// Generate extended `remove` and `empty` functions
 	['remove', 'empty'].forEach(function (methodName) {
-		var origFn = $.fn[methodName];
-		$.fn[methodName] = function () {
+		var origFn = Yaex.DOM.Function[methodName];
+		Yaex.DOM.Function[methodName] = function () {
 			var elements = this.find('*');
 			if (methodName === 'remove') elements = elements.add(this);
 			elements.removeData();
 			return origFn.call(this);
 		}
 	});
-})(Yaex)
+
+})(window, document);
+
+//---
+
