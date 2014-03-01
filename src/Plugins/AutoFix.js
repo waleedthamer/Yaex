@@ -6,7 +6,7 @@
 	};
 
 	$.fn.AutoFix = function (options) {
-		var settings = $.Extend({}, defaults, options),
+		var settings = Yaex.Utility.simpleExtend({}, defaults, options),
 			el = $(this),
 			curpos = el.position(),
 			offset = settings.customOffset,
@@ -63,4 +63,4 @@
 			});
 		}
 	};
-})(Yaex)
+})($);

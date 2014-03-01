@@ -1,14 +1,30 @@
-+(function (window, undefined) {
+/**
+ * Callbacks - Callbacks implementation using Yaex's API [CORE]
+ *
+ *
+ * @depends: Yaex.js | Core
+ * @version 0.10
+ * @license Dual licensed under the MIT and GPL licenses.
+ */
+
+//---
+
++ ('Yaex', function (window, document, undefined) {
+
 	'use strict';
+
 	// Create a collection of callbacks to be fired in a sequence, with configurable behaviour
 	// Option flags:
 	//   - once: Callbacks fired at most one time.
 	//   - memory: Remember the most recent context and arguments
 	//   - stopOnFalse: Cease iterating over callback list
 	//   - unique: Permit adding at most one instance of the same callback
-	$.Callbacks = function (options) {
 
-		options = $.Extend({}, options);
+	/**
+	 * Yaex.Callbacks
+	 */
+	Yaex.Callbacks = function (options) {
+		options = Yaex.Utility.simpleExtend({}, options);
 
 		var memory; // Last fire value (for non-forgettable lists)
 
@@ -60,7 +76,7 @@
 					var start = list.length;
 
 					var add = function (args) {
-						$.each(args, function (_, arg) {
+						Yaex.Each(args, function (_, arg) {
 							if (typeof arg === 'function') {
 								if (!options.unique || !Callbacks.has(arg)) list.push(arg);
 							} else if (arg && arg.length && typeof arg !== 'string') add(arg);
@@ -81,9 +97,9 @@
 			},
 			remove: function () {
 				if (list) {
-					$.each(arguments, function (_, arg) {
+					Yaex.Each(arguments, function (_, arg) {
 						var index;
-						while ((index = $.inArray(arg, list, index)) > -1) {
+						while ((index = Yaex.Global.inArray(arg, list, index)) > -1) {
 							list.splice(index, 1);
 							// Handle firing indexes
 							if (firing) {
@@ -96,7 +112,7 @@
 				return this;
 			},
 			has: function (fn) {
-				return !!(list && (fn ? $.inArray(fn, list) > -1 : list.length));
+				return !!(list && (fn ? Yaex.Global.inArray(fn, list) > -1 : list.length));
 			},
 			empty: function () {
 				firingLength = list.length = 0;
@@ -135,5 +151,10 @@
 		};
 
 		return Callbacks;
-	};
-})(this)
+	}; // END OF Yaex.Callbacks FUNCTION
+
+	//---
+
+})(window, document);
+
+//---

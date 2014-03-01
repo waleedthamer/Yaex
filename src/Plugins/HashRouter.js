@@ -1,25 +1,26 @@
 /**
- * Router - Cross browser hash router implementation using Yaex's API
+ * HashRouter - Cross browser hash router implementation using Yaex.DOM's API
  *
  *
- * @depends: Yaex.js | Core, Event, Extra, HashChange
+ * @depends: Yaex.js | Core, Event, Extra
  * @version 0.10
  * @license Dual licensed under the MIT and GPL licenses.
  */
 
-+ ('Yaex', function ($) {
++ ('Yaex', function () {
+
 	'use strict';
 
 	// Routes array
-	var Routes = [];
+	var HashRoutes = new Array;
 
-	var location = $.Location;
+	var location = Yaex.DOM.Location;
 
 	var DefaultOptions = {
 		DefaultPath: '/',
-		Before: $.Noop,
-		On: $.Noop,
-		NotFound: $.Noop
+		Before: Yaex.Noop,
+		On: Yaex.Noop,
+		NotFound: Yaex.Noop
 	}; // END OF DefaultOptions CLASS
 
 	var Router = {
@@ -41,7 +42,7 @@
 					name = null;
 				} // END if
 
-				Routes.push({
+				HashRoutes.push({
 					path: path,
 					name: name,
 					fn: fn || function () {}
@@ -85,8 +86,8 @@
 
 		Router.current = hash;
 
-		for (var x = 0, l = Routes.length; x < l && !found; x++) {
-			var route = Routes[x];
+		for (var x = 0, l = HashRoutes.length; x < l && !found; x++) {
+			var route = HashRoutes[x];
 			var path = route.path;
 			var name = route.name;
 			var fn = route.fn;
@@ -124,7 +125,7 @@
 	Router.init = function () {
 		// window.addEventListener('hashchange', HashChange);
 
-		$(window).hashchange(HashChange);
+		Yaex.DOM(window).hashchange(HashChange);
 
 		return HashChange();
 	}; // END OF init FUNCTION
@@ -135,6 +136,10 @@
 	// window.router = Router;
 
 	// Assign the Router class to Yaex's global
-	$.router = Router;
-	// })(Yaex, window, document)
-})(Yaex)
+	Yaex.DOM.HashRouter = Router;
+
+	//---
+	
+})(Yaex.DOM);
+
+//---

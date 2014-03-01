@@ -65,4 +65,4 @@
 
 	// ALERT DATA-API
 	$(document).on('click.yaex.alert.data-api', dismiss, Alert.prototype.close);
-})(Yaex)
+})($);
