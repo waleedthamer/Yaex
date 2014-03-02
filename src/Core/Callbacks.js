@@ -24,6 +24,7 @@
 	 * Yaex.Callbacks
 	 */
 	Yaex.Callbacks = function (options) {
+		
 		options = Yaex.Utility.simpleExtend({}, options);
 
 		var memory; // Last fire value (for non-forgettable lists)
